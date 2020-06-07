@@ -1,0 +1,10 @@
+node_modules
+package-lock.json
+.nyc_output
+.idea
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
