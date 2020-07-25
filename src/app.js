@@ -36,5 +36,4 @@ app.use((req, res) => res.status(404).send({
 // catch all errors
 app.use(errorHandler);
 
-
 module.exports = app;

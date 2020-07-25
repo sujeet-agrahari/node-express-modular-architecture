@@ -1,4 +1,4 @@
-const { AuthService } = require('../auth');
+const { AuthService } = require('../auth/auth.module');
 
 const { verifyJWT } = require('../utils/jwt');
 const { UnauthorizedError } = require('../utils/api-errors');
