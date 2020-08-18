@@ -9,9 +9,6 @@ require('express-async-errors');
 
 const { errorHandler, badJsonHandler } = require('./middlewares');
 
-// load environment config variables
-require('dotenv').config();
-
 // enable cors
 app.use(cors());
 

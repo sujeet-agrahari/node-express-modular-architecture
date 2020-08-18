@@ -1,8 +1,6 @@
-
 const login = (doCheckUserExist, doLogin) => async (httpRequest) => {
   const { username, password } = httpRequest.body;
   const userData = await doCheckUserExist({ username });
-  // do login
   const loginData = {
     username,
     role: userData.role_id,

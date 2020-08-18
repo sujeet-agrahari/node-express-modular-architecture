@@ -12,7 +12,7 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-glob.sync(`${__dirname} + /../**/*.model.js`)
+glob.sync(`${__dirname} + /../**/components/*.model.js`)
   .forEach((file) => {
     const model = sequelize.import(file);
     db[model.name] = model;

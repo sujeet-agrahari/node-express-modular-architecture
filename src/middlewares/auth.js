@@ -1,6 +1,6 @@
-const { AuthService } = require('../auth/auth.module');
+const AuthService = require('../components/auth/auth.service');
 
-const { verifyJWT } = require('../utils/jwt');
+const { verifyJWT } = require('../components/auth/jwt.service');
 const { UnauthorizedError } = require('../utils/api-errors');
 
 module.exports = async (req, res, next) => {

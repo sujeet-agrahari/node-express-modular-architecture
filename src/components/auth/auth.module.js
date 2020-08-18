@@ -1,11 +1,17 @@
 const router = require('express').Router();
 
+const {
+  makeExpressCallback,
+  makeValidatorCallback,
+} = require('../../middlewares');
 
+// validator
+const AuthValidator = require('./auth.validator');
+
+// service
 const { doRegister, doLogin, doCheckUserExist } = require('./auth.service');
-const makeExpressCallback = require('../utils/express-callback');
 
-const { BadRequestError } = require('../utils/api-errors');
-
+const { BadRequestError } = require('../../utils/api-errors');
 
 // controller
 const controller = require('./auth.controller');
@@ -16,7 +22,13 @@ const login = controller.login({ doCheckUserExist, doLogin });
 const AuthController = { register, login };
 
 // routes
-const routes = require('./auth.routes')({ AuthController, router, makeExpressCallback });
+const routes = require('./auth.routes')({
+  router,
+  AuthController,
+  AuthValidator,
+  makeValidatorCallback,
+  makeExpressCallback,
+});
 
 module.exports = {
   AuthController,

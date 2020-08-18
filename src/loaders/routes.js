@@ -1,8 +1,7 @@
 // Routes
 const {
   AuthRoutes,
-} = require('../auth/auth.module');
-
+} = require('../components/auth/auth.module');
 
 module.exports = function getRoutes(app) {
   // ........................ Auth Routes ........................

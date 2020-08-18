@@ -1,7 +1,10 @@
-class APIError {
-  constructor(status, code, message) {
+/* eslint-disable no-multi-assign */
+/* eslint-disable no-param-reassign */
+/* eslint-disable max-classes-per-file */
+class APIError extends Error {
+  constructor(status, message) {
+    super();
     this.status = status;
-    this.code = code;
     this.message = message;
   }
 }
@@ -14,6 +17,10 @@ const apiErrors = Object.entries({
   Unauthorized: {
     statusCode: 401,
     message: 'Unathorized',
+  },
+  AccessDeniedError: {
+    statusCode: 401,
+    message: 'Access denied',
   },
   Forbidden: {
     statusCode: 403,
@@ -31,7 +38,7 @@ const apiErrors = Object.entries({
     statusCode: 415,
     message: 'Unsupported Media Type',
   },
-  UnProceesableEntity: {
+  UnProcessableEntity: {
     statusCode: 422,
     message: 'Unprocessable Entity',
   },
@@ -39,10 +46,10 @@ const apiErrors = Object.entries({
     statusCode: 500,
     message: 'Internal Server Error',
   },
-  MethodNotAllowed:{
+  MethodNotAllowed: {
     statusCode: 405,
-    message: "Method Not Allowed"
-}
+    message: 'Method Not Allowed',
+  },
 }).reduce((map, [name, data]) => {
   map[`${name}Error`] = map[name] = class extends APIError {
     constructor(message = data.message) {

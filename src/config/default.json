@@ -1,7 +1,7 @@
 {
-    "_COMMENT1": ".............................JWT CONFIGS.....................",
-    "SIGN_OPTIONS": {
-      "issuer": "Nephonine Solutions Pvt Ltd",
-      "audience": "https://hoopy.in"
-    }
+  "_COMMENT1": ".............................JWT CONFIGS.....................",
+  "SIGN_OPTIONS": {
+    "issuer": "My Compny Pvt Ltd",
+    "audience": "https://example.in"
+  }
 }

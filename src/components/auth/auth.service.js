@@ -4,9 +4,9 @@ const {
   SIGN_OPTION,
 } = require('config');
 const bcrypt = require('bcryptjs');
-const { User } = require('../db');
-const { generateJWT } = require('../utils/jwt');
-const { NotFoundError, BadRequestError } = require('../utils/api-errors');
+const { User } = require('../../db');
+const { generateJWT } = require('./jwt.service');
+const { NotFoundError, BadRequestError } = require('../../utils/api-errors');
 
 const doRegister = async ({ username, password }) => {
   const user = await User.create({
