@@ -1,0 +1,8 @@
+.git
+*.log
+.idea
+.nyc_output
+*Dockerfile*
+node_modules
+*docker-compose*
+
