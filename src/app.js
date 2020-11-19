@@ -7,7 +7,11 @@ const cors = require('cors');
 // error handler
 require('express-async-errors');
 
-const { errorHandler, badJsonHandler } = require('./middlewares');
+const { errorHandler, badJsonHandler, notFoundHandler } = require('./middlewares');
+
+// error logger
+
+const logger = require('../src/utils/logger');
 
 // enable cors
 app.use(cors());
@@ -25,10 +29,10 @@ require('./loaders/routes')(app);
 require('./loaders/config');
 
 // handle 404 not found error
-app.use((req, res) => res.status(404).send({
-  status: false,
-  message: `Sorry, requested URL ${req.method} ${req.url} not found!`,
-}));
+app.use(notFoundHandler);
+
+// log error
+app.use(logger);
 
 // catch all errors
 app.use(errorHandler);
