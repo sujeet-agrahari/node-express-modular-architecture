@@ -7,10 +7,8 @@ require('dotenv').config();
 
 // dependency to be stubbed
 const Middleware = require('../src/middlewares');
-const AuthService = require('../src/components/auth/auth.service');
 
 // stubs
-const doLogoutStub = sinon.stub(AuthService, 'doLogout').resolves({});
 const authStub = sinon.stub(Middleware, 'auth').callsFake((req, res, next) => {
   req.user = {};
   req.user.id = faker.random.number(999999999);
@@ -62,14 +60,3 @@ test.skip('Register User', async (t) => {
   t.true(typeof res === 'object');
 });
 
-test.skip('Logout User', async (t) => {
-  const { server, baseUrl, stubs } = t.context;
-  const res = await server
-    .post(`${baseUrl}/logout`)
-    .set('Accept', 'application/json')
-    .expect('Content-Type', /json/)
-    .expect(200);
-  t.true(stubs.authStub.calledOnce);
-  t.true(stubs.doLogoutStub.calledOnce);
-  t.true(typeof res === 'object');
-});
