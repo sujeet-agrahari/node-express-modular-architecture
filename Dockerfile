@@ -14,7 +14,7 @@ HEALTHCHECK --interval=30s CMD node healthcheck.js
 FROM base as source
 COPY --chown=node:node . .
 
-FROM base as dev
+FROM source as dev
 ENV NODE_ENV=development
 RUN npm install --only=development
 CMD ["nodemon", "server.js"]
