@@ -14,7 +14,7 @@ const doRegister = async ({ username, password }) => {
     password,
     role_id: 1, // assign role id here
   });
-    // generate access token
+  // generate access token
   const payload = {
     username,
     role: user.role_id,
@@ -62,8 +62,7 @@ const doCheckUserExist = async ({ username }) => {
       username,
     },
   });
-  if (!user) throw new NotFoundError('User not found!');
-  return user;
+  return user ? user : false;
 };
 
 module.exports = { doRegister, doLogin, doCheckUserExist };

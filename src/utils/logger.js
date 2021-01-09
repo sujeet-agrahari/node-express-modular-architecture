@@ -1,19 +1,32 @@
-const winston = require('winston');
+const expressWinston = require('express-winston')
+const { createLogger, format, transports } = require('winston');
 
-const logger = winston.createLogger({
-  level: 'error',
-  format: winston.format.combine(
-    winston.format.json(),
-    winston.format.colorize(),
-  ),
+const logger = expressWinston.errorLogger({
   transports: [
-    new winston.transports.File({
-      filename: 'error.log',
+    new transports.File({
+      json: true,
+      maxFiles: 5,
       level: 'error',
+      colorize: false,
+      filename: 'logs/error.log',
+      handleExceptions: true,
+      maxsize: 5242880, // 5MB
     }),
   ],
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.json()
+  )
 });
 
-module.exports = {
-  logger,
-};
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(new transports.Console({
+    format: format.combine(
+      format.colorize(),
+      format.simple(),
+    ),
+    level: 'debug',
+  }));
+}
+
+module.exports = logger;
