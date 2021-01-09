@@ -71,17 +71,14 @@ function onListening() {
   console.info(`Listening on ${bind}`);
 }
 
-// stoppable server for graceful shutdown
-const stoppableServer = stoppable(server);
-
 // quit on ctrl+c when running docker in terminal
-process.on('SIGINT', () => {
+process.on('SIGINT', async () => {
   console.info('Got SIGINT (aka ctrl+c in docker). Graceful shutdown', new Date().toISOString());
-  gracefulShutdown(stoppableServer);
+  await gracefulShutdown(stoppable(server));
 });
 
 // quit properly on docker stop
-process.on('SIGTERM', () => {
+process.on('SIGTERM', async () => {
   console.log('Got SIGTERM (docker container stop).Graceful shutdown', new Date().toISOString());
-  gracefulShutdown(stoppableServer);
+  await gracefulShutdown(stoppable(server));
 });
