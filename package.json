@@ -1,7 +1,7 @@
 {
-  "name": "glue-elearning",
+  "name": "node-express-clean-architecture",
   "version": "1.0.0",
-  "description": "A project to provide plateform for connecting schools to their teacher, and teachers to their students.",
+  "description": "A modular folder structure for developing highly scalable and maintainable APIs in nodejs using express.",
   "main": "server.js",
   "scripts": {
     "test": "npm test",
