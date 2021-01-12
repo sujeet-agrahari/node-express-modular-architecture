@@ -1,5 +1,4 @@
 ## Node.js Express Clean Architecture
-
 ---
 *A boilerplate for Node.js and express web applications.*
 
