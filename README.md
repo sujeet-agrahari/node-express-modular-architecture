@@ -36,3 +36,7 @@ It is also loaded with logger and production ready Docker configurations.
 - [Dotenv](https://www.npmjs.com/package/dotenv)
 - [Bcryptjs](https://www.npmjs.com/package/bcryptjs)
 - [Config](https://www.npmjs.com/package/config)
+
+*Have some idea that you would loike to share?*
+
+Clone and create a pull request, it's always welcomed! :yum:
