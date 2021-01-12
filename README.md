@@ -4,7 +4,7 @@
 
 *A boilerplate for Node.js and express web applications.*
 
-This project is an effort to provide a example of the best practices listed [here]([GitHub - goldbergyoni/nodebestpractices: The Node.js best practices list (January 2021)](https://github.com/goldbergyoni/nodebestpractices))
+This project is an effort to provide a example of the best practices listed ([here](https://github.com/goldbergyoni/nodebestpractices))
 
 Also, there is some other docker best practices in the project that I added as well.
 
