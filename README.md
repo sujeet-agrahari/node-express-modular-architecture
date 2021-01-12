@@ -17,6 +17,8 @@ There is a `module.js ` file in each component which acts as a central point for
 It is also loaded with logger and production ready Docker configurations.
 
 
+
+
 *Have some idea that you would loike to share?*
 
 Clone and create a pull request, it's always welcomed! :yum:
