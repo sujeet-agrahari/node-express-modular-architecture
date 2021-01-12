@@ -1,5 +1,5 @@
 ## Node.js Express Clean Architecture
----
+
 *A boilerplate for Node.js and express web applications.*
 
 This project is an effort to provide a example of the best practices listed ([here](https://github.com/goldbergyoni/nodebestpractices))
