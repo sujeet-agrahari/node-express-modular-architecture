@@ -4,12 +4,12 @@ const {
   SIGN_OPTION,
 } = require('config');
 const bcrypt = require('bcryptjs');
-const { User } = require('../../db/models');
+const db = require('../../db/models');
 const { generateJWT } = require('./jwt.service');
 const { BadRequestError } = require('../../utils/api-errors');
 
 const doRegister = async ({ username, password }) => {
-  const user = await User.create({
+  const user = await db.User.create({
     username,
     password,
     role_id: 1, // assign role id here
@@ -57,12 +57,12 @@ const doLogin = async ({
   };
 };
 const doCheckUserExist = async ({ username }) => {
-  const user = await User.findOne({
+  const user = await db.User.findOne({
     where: {
       username,
     },
   });
-  return user ? user : false;
+  return user || false;
 };
 
 module.exports = { doRegister, doLogin, doCheckUserExist };

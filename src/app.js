@@ -4,14 +4,12 @@ const app = express();
 
 const cors = require('cors');
 
+require('dotenv').config();
+
 // error handler
 require('express-async-errors');
 
 const { errorHandler, badJsonHandler, notFoundHandler } = require('./middlewares');
-
-// error logger
-
-const logger = require('../src/utils/logger');
 
 // enable cors
 app.use(cors());
@@ -30,9 +28,6 @@ require('./loaders/config');
 
 // handle 404 not found error
 app.use(notFoundHandler);
-
-// log error
-app.use(logger);
 
 // catch all errors
 app.use(errorHandler);
