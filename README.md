@@ -23,7 +23,7 @@ It is also loaded with logger and production ready Docker configurations.
 
 Clone and create a pull request, it's always welcomed! :yum:
 
-For complete working example visit (this)[https://github.com/sujeet-agrahari/population-comparison]
+For complete working example visit https://github.com/sujeet-agrahari/population-comparison
 
 ---
 
