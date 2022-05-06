@@ -10,5 +10,5 @@ const verifyJWT = async ({ token, secretKey, signOption }) => {
 };
 module.exports = {
   generateJWT,
-  verifyJWT,
+  verifyJWT
 };

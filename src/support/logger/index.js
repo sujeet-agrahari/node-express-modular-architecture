@@ -9,15 +9,13 @@ const logToFile = createLogger({
       level: 'error',
       colorize: false,
       filename: 'logs/error.log',
-      maxsize: 5242880, // 5MB
-    }),
-  ],
+      maxsize: 5242880 // 5MB
+    })
+  ]
 });
 
 const logFormatter = format.printf((info) => {
-  const {
-    timestamp, level, stack, message,
-  } = info;
+  const { timestamp, level, stack, message } = info;
   const errorMessage = stack || message;
   return `${timestamp} ${level}: ${errorMessage}`;
 });
@@ -27,13 +25,13 @@ const logToConsole = createLogger({
   format: format.errors({ stack: true }),
   transports: [
     new transports.Console({
-      format: format.combine(format.colorize(), format.simple(), format.timestamp(), logFormatter),
-    }),
-  ],
+      format: format.combine(format.colorize(), format.simple(), format.timestamp(), logFormatter)
+    })
+  ]
 });
 
 module.exports = {
   log,
   logToFile,
-  logToConsole,
+  logToConsole
 };

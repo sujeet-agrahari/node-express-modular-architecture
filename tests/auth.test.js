@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-param-reassign */
 const test = require('ava');
 const request = require('supertest');
 const sinon = require('sinon');
@@ -19,13 +21,13 @@ const app = require('../src/app');
 
 test.before(async (t) => {
   t.context.stubs = {
-    authStub,
+    authStub
   };
   t.context.baseUrl = '/api/v1/auth';
   t.context.server = request(app);
 });
 
-test.after.always((t) => {
+test.after.always(() => {
   delete require.cache[require.resolve('../src/app')]; // kills server
 });
 
@@ -35,7 +37,7 @@ test.skip('Login User', async (t) => {
     .post(`${baseUrl}/login`)
     .send({
       phone: '8576863491',
-      otp: faker.random.number(9999),
+      otp: faker.random.number(9999)
     })
     .set('Accept', 'application/json')
     .expect('Content-Type', /json/)
@@ -51,7 +53,7 @@ test.skip('Register User', async (t) => {
     .post(`${baseUrl}/register`)
     .send({
       phone: phoneNumber,
-      otp: 5896,
+      otp: 5896
     })
     .set('Accept', 'application/json')
     .expect('Content-Type', /json/)
@@ -59,4 +61,3 @@ test.skip('Register User', async (t) => {
   t.true(stubs.doVerifyOtpStub.called);
   t.true(typeof res === 'object');
 });
-

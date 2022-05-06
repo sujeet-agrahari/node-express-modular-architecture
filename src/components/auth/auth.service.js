@@ -1,8 +1,4 @@
-const {
-  JWT_ACCESS_TOKEN_SECRET,
-  ACCESS_TOKEN_EXPIRES_IN,
-  SIGN_OPTION,
-} = require('config');
+const { JWT_ACCESS_TOKEN_SECRET, ACCESS_TOKEN_EXPIRES_IN, SIGN_OPTION } = require('config');
 const bcrypt = require('bcryptjs');
 const db = require('../../db/models');
 const { generateJWT } = require('./jwt.service');
@@ -12,55 +8,53 @@ const doRegister = async ({ username, password }) => {
   const user = await db.User.create({
     username,
     password,
-    role_id: 1, // assign role id here
+    role_id: 1 // assign role id here
   });
   // generate access token
   const payload = {
     username,
-    role: user.role_id,
+    role: user.role_id
   };
   const token = await generateJWT({
     secretKey: JWT_ACCESS_TOKEN_SECRET,
     payload,
     signOption: {
       ...SIGN_OPTION,
-      expiresIn: ACCESS_TOKEN_EXPIRES_IN,
-    },
+      expiresIn: ACCESS_TOKEN_EXPIRES_IN
+    }
   });
   return {
     access_token: token,
-    ...payload,
+    ...payload
   };
 };
 
-const doLogin = async ({
-  username, userRole, passedPassword, actualPassword,
-}) => {
+const doLogin = async ({ username, userRole, passedPassword, actualPassword }) => {
   const isValidPass = bcrypt.compareSync(passedPassword, actualPassword);
   if (!isValidPass) throw new BadRequestError('Username or Password is invalid!');
   // generate access token
   const payload = {
     username,
-    role: userRole,
+    role: userRole
   };
   const token = await generateJWT({
     secretKey: JWT_ACCESS_TOKEN_SECRET,
     payload,
     signOption: {
       ...SIGN_OPTION,
-      expiresIn: ACCESS_TOKEN_EXPIRES_IN,
-    },
+      expiresIn: ACCESS_TOKEN_EXPIRES_IN
+    }
   });
   return {
     access_token: token,
-    ...payload,
+    ...payload
   };
 };
 const doCheckUserExist = async ({ username }) => {
   const user = await db.User.findOne({
     where: {
-      username,
-    },
+      username
+    }
   });
   return user || false;
 };

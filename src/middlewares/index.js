@@ -6,7 +6,6 @@ const notFoundHandler = require('./not-found-error');
 const makeExpressCallback = require('./express-callback');
 const makeValidatorCallback = require('./validator-callback');
 
-
 module.exports = {
   auth,
   authorize,
@@ -14,5 +13,5 @@ module.exports = {
   badJsonHandler,
   notFoundHandler,
   makeExpressCallback,
-  makeValidatorCallback,
+  makeValidatorCallback
 };

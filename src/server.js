@@ -28,8 +28,6 @@ const server = http.createServer(app);
  */
 
 server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
 
 /**
  * Event listener for HTTP server "error" event.
@@ -40,9 +38,7 @@ function onError(error) {
     throw error;
   }
 
-  const bind = typeof port === 'string'
-    ? `Pipe ${port}`
-    : `Port ${port}`;
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -65,11 +61,12 @@ function onError(error) {
 
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === 'string'
-    ? `pipe ${addr}`
-    : `port ${addr.port}`;
+  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
   console.info(`Listening on ${bind}`);
 }
+
+server.on('error', onError);
+server.on('listening', onListening);
 
 // quit on ctrl+c when running docker in terminal
 process.on('SIGINT', async () => {

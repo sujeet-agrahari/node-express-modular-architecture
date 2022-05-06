@@ -12,44 +12,44 @@ class APIError extends Error {
 const apiErrors = Object.entries({
   BadRequest: {
     statusCode: 400,
-    message: 'Bad Request',
+    message: 'Bad Request'
   },
   Unauthorized: {
     statusCode: 401,
-    message: 'Unathorized',
+    message: 'Unathorized'
   },
   AccessDeniedError: {
     statusCode: 401,
-    message: 'Access denied',
+    message: 'Access denied'
   },
   Forbidden: {
     statusCode: 403,
-    message: 'Forbidden',
+    message: 'Forbidden'
   },
   NotFound: {
     statusCode: 404,
-    message: 'Not found',
+    message: 'Not found'
   },
   Conflict: {
     statusCode: 409,
-    message: 'Conflict',
+    message: 'Conflict'
   },
   UnSupportedMediaType: {
     statusCode: 415,
-    message: 'Unsupported Media Type',
+    message: 'Unsupported Media Type'
   },
   UnProcessableEntity: {
     statusCode: 422,
-    message: 'Unprocessable Entity',
+    message: 'Unprocessable Entity'
   },
   InternalServer: {
     statusCode: 500,
-    message: 'Internal Server Error',
+    message: 'Internal Server Error'
   },
   MethodNotAllowed: {
     statusCode: 405,
-    message: 'Method Not Allowed',
-  },
+    message: 'Method Not Allowed'
+  }
 }).reduce((map, [name, data]) => {
   map[`${name}Error`] = map[name] = class extends APIError {
     constructor(message = data.message) {
@@ -61,5 +61,5 @@ const apiErrors = Object.entries({
 
 module.exports = {
   ...apiErrors,
-  APIError,
+  APIError
 };

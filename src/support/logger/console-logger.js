@@ -17,5 +17,5 @@ const info = (msg) => {
 module.exports = {
   info,
   error,
-  success,
+  success
 };
