@@ -16,7 +16,12 @@ There is a `module.js ` file in each component which acts as a central point for
 
 It is also loaded with logger and production ready Docker configurations.
 
+**CLI Support**
 
+Components along with controller, service, router and module can be generated using below command.
+```
+npm run create:component -- --name="ComponentNameHere"
+```
 
 
 *Have some idea that you would loike to share?*

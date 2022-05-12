@@ -9,7 +9,8 @@
     "lint": "./node_modules/.bin/eslint .",
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
-    "lint:fix": "./node_modules/.bin/eslint . --fix"
+    "lint:fix": "./node_modules/.bin/eslint . --fix",
+    "create:component": "node ./cli init:component"
   },
   "author": "Sujeet Agrahari",
   "license": "ISC",
@@ -43,13 +44,17 @@
   "devDependencies": {
     "ava": "^4.2.0",
     "babel-eslint": "^10.1.0",
+    "cli-color": "^2.0.2",
     "eslint": "^8.14.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "fs-extra": "^10.1.0",
+    "js-beautify": "^1.14.3",
     "nodemon": "^2.0.16",
     "prettier": "^2.6.2",
-    "sequelize-cli": "^6.4.1"
+    "sequelize-cli": "^6.4.1",
+    "yargs": "^17.5.0"
   }
 }
