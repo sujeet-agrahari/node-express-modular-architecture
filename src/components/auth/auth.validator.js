@@ -8,14 +8,19 @@ const options = {
   }
 };
 
-const validateRegisterData = (httpRequest) => {
+const validateLogin = (httpRequest) => {
   const schema = Joi.object({
-    username: Joi.string().min(3).max(8).required(),
+    phone: Joi.string()
+      .pattern(/^[6-9]\d{9}$/)
+      .required()
+      .messages({
+        'string.pattern.base': 'Provide valid phone number!'
+      }),
     password: Joi.string().min(8).max(20).alphanum().required()
   });
   return schema.validate(httpRequest.body, options);
 };
 
 module.exports = {
-  validateRegisterData
+  validateLogin
 };

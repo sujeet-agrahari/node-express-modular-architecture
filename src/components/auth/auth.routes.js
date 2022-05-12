@@ -1,10 +1,14 @@
+/**
+ *
+ * @param {Object} AuthRouter
+ * @param {ExpressRouter} AuthRouter.router
+ * @param {AuthController} AuthRouter.AuthController
+ * @param {AuthValidator} AuthRouter.AuthValidator
+ * @param {makeExpressCallback} AuthRouter.makeExpressCallback
+ * @param {makeValidatorCallback} AuthRouter.makeValidatorCallback
+ * @returns {ExpressRouter}
+ */
 module.exports = ({ router, AuthController, AuthValidator, makeValidatorCallback, makeExpressCallback }) => {
-  router.post(
-    '/register',
-    makeValidatorCallback(AuthValidator.validateBody),
-    makeExpressCallback(AuthController.register)
-  );
-
-  router.post('/login', makeExpressCallback(AuthController.login));
+  router.post('/login', makeValidatorCallback(AuthValidator.validateLogin), makeExpressCallback(AuthController.login));
   return router;
 };

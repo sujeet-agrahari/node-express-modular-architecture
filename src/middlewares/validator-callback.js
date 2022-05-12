@@ -6,7 +6,10 @@ module.exports = (validator) => (req, res, next) => {
     query: req.query,
     params: req.params
   };
-  const { error } = validator(httpRequest);
-  if (error) throw new BadRequestError(error.message);
+  const { error, value } = validator(httpRequest);
+  if (error) {
+    throw new BadRequestError(error.message);
+  }
+  req.body = value;
   return next();
 };

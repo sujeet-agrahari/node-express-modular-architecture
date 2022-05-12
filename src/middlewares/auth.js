@@ -1,16 +1,20 @@
-const AuthService = require('../components/auth/auth.service');
-
-const { verifyJWT } = require('../components/auth/jwt.service');
+const { verifyJWT } = require('../components/Auth/jwt.service');
 const { UnauthorizedError } = require('../utils/api-errors');
 
-module.exports = async (req, res, next) => {
-  let token = req.header('Authorization') || req.header('authorization');
-  if (!token) throw new UnauthorizedError();
-  token = req.headers.authorization.replace('Bearer ', '');
+const decodeToken = async (header) => {
+  if (!header) {
+    throw new UnauthorizedError('Authorization header missing');
+  }
+  const token = header.replace('Bearer ', '');
+  const payload = await verifyJWT({ token });
+  return payload;
+};
 
-  const payload = await verifyJWT(token);
-  req.user = payload;
-  // check if user is not blocked and exist
-  await AuthService.doCheckIsUserExist({ userId: req.user.id });
+module.exports = async (req, res, next) => {
+  const { method, path } = req;
+  if (method === 'OPTIONS' || ['/api/v1/auth/login'].includes(path)) {
+    return next();
+  }
+  req.context = await decodeToken(req.header('Authorization') || req.header('authorization'));
   return next();
 };
