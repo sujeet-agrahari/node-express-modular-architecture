@@ -6,6 +6,8 @@ const cors = require('cors');
 
 require('dotenv').config();
 
+const { requestLogger } = require('./support/logger');
+
 // error handler
 require('express-async-errors');
 
@@ -13,6 +15,9 @@ const { errorHandler, badJsonHandler, notFoundHandler } = require('./middlewares
 
 // enable cors
 app.use(cors());
+
+// logger
+app.use(requestLogger);
 
 // parse json body
 app.use(express.json());
