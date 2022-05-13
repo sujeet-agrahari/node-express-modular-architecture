@@ -1,11 +1,9 @@
 const { UniqueConstraintError, ValidationError, AggregateError } = require('sequelize');
-const { loggers } = require('winston');
+const logger = require('../support/logger');
 const { APIError } = require('../utils/api-errors');
 
 module.exports = async (error, req, res, next) => {
-  if (process.env.NODE_ENV === 'development') {
-    loggers.error(error);
-  }
+  logger.error(error);
 
   // catch api error
   if (error instanceof APIError) {
