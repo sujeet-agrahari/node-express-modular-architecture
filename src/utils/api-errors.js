@@ -1,5 +1,3 @@
-/* eslint-disable no-multi-assign */
-/* eslint-disable no-param-reassign */
 /* eslint-disable max-classes-per-file */
 class APIError extends Error {
   constructor(status, message) {
@@ -9,57 +7,76 @@ class APIError extends Error {
   }
 }
 
-const apiErrors = Object.entries({
-  BadRequest: {
-    statusCode: 400,
-    message: 'Bad Request'
-  },
-  Unauthorized: {
-    statusCode: 401,
-    message: 'Unathorized'
-  },
-  AccessDeniedError: {
-    statusCode: 401,
-    message: 'Access denied'
-  },
-  Forbidden: {
-    statusCode: 403,
-    message: 'Forbidden'
-  },
-  NotFound: {
-    statusCode: 404,
-    message: 'Not found'
-  },
-  Conflict: {
-    statusCode: 409,
-    message: 'Conflict'
-  },
-  UnSupportedMediaType: {
-    statusCode: 415,
-    message: 'Unsupported Media Type'
-  },
-  UnProcessableEntity: {
-    statusCode: 422,
-    message: 'Unprocessable Entity'
-  },
-  InternalServer: {
-    statusCode: 500,
-    message: 'Internal Server Error'
-  },
-  MethodNotAllowed: {
-    statusCode: 405,
-    message: 'Method Not Allowed'
+class BadRequestError extends APIError {
+  constructor(message = 'Bad Request') {
+    super(400, message);
   }
-}).reduce((map, [name, data]) => {
-  map[`${name}Error`] = map[name] = class extends APIError {
-    constructor(message = data.message) {
-      super(data.statusCode, message);
-    }
-  };
-  return map;
-}, {});
+}
+
+class AccessDeniedError extends APIError {
+  constructor(message = 'Access denied') {
+    super(401, message);
+  }
+}
+
+class UnauthorizedError extends APIError {
+  constructor(message = 'Unauthorized') {
+    super(403, message);
+  }
+}
+
+class ForbiddenError extends APIError {
+  constructor(message = 'Forbidden') {
+    super(403, message);
+  }
+}
+
+class NotFoundError extends APIError {
+  constructor(message = 'Not Found') {
+    super(404, message);
+  }
+}
+
+class MethodNotAllowedError extends APIError {
+  constructor(message = 'Method Not Allowed') {
+    super(405, message);
+  }
+}
+
+class ConflictError extends APIError {
+  constructor(message = 'Conflict') {
+    super(408, message);
+  }
+}
+
+class UnSupportedMediaTypeError extends APIError {
+  constructor(message = 'Unsupported Media Type') {
+    super(415, message);
+  }
+}
+
+class UnProcessableEntityError extends APIError {
+  constructor(message = 'Unprocessable Entity') {
+    super(422, message);
+  }
+}
+
+class InternalServerError extends APIError {
+  constructor(message = 'Internal Server Error') {
+    super(500, message);
+  }
+}
 
 module.exports = {
-  ...apiErrors,
-  APIError
+  APIError,
+  ConflictError,
+  ForbiddenError,
+  NotFoundError,
+  BadRequestError,
+  UnauthorizedError,
+  AccessDeniedError,
+  InternalServerError,
+  MethodNotAllowedError,
+  UnProcessableEntityError,
+  UnSupportedMediaTypeError
 };
