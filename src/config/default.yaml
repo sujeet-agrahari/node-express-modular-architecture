@@ -3,3 +3,4 @@ JWT_SIGN_OPTIONS:
   issuer: My Compny Pvt Ltd
   audience: https://example.in
   expiresIn: 15d
+API_PREFIX: api/v1
