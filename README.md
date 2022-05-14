@@ -114,17 +114,17 @@ NODE_CONFIG_DIR=./src/config
 src\
  |--config\         # Environment variables and configuration related things
  |--components\     # Each entity is wrapped inside its own component
-   |--component.module.js # Component entry file
-   |--component.controller.js #Component controller
-   |--component.service.js #Component service
-   |--component.routes.js # Component routes
-   |--component.validator.js # Component validators
+   |--component.module.js      # Component entry file
+   |--component.controller.js  # Component controller
+   |--component.service.js     # Component service
+   |--component.routes.js      # Component routes
+   |--component.validator.js   # Component validators
  |--docs\           # Swagger files
  |--middlewares\    # Custom express middlewares
  |--db\             # Sequelize ORM files (data layer)
-   |--models # Sequelize models
-   |--seeders # Sequelize seeders
-   |--migrations # Sequelize migrations
+   |--models                  # Sequelize models
+   |--seeders                 # Sequelize seeders
+   |--migrations              # Sequelize migrations
  |--utils\          # Utility classes and functions
  |--loaders\.       # Lodas routes and configs; also validates configs
  |--support\        # Wrapper around used packages so that it can be replaced if package is changed
