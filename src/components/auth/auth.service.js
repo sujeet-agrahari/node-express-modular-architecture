@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const { User } = require('../../db/models');
-const { generateJWT } = require('./jwt.service');
+const JwtService = require('./jwt.service');
 const { BadRequestError, NotFoundError } = require('../../utils/api-errors');
 
 const AuthService = {
@@ -33,7 +33,7 @@ const AuthService = {
       role: user.role
     };
 
-    const accessToken = await generateJWT({
+    const accessToken = await JwtService.generateJWT({
       payload
     });
     return {

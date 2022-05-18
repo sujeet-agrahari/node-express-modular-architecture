@@ -2,9 +2,10 @@
   "name": "NITTI",
   "version": "1.0.0",
   "description": "Backend APIs for NITTI",
-  "main": "server.js",
+  "main": "./src/server.js",
   "scripts": {
-    "test": "npm test",
+    "test": "NODE_CONFIG_DIR=./src/config vitest --run --reporter verbose",
+    "coverage": "vitest run --coverage",
     "start": "nodemon -L ./src/server.js",
     "lint": "./node_modules/.bin/eslint .",
     "migrate": "sequelize db:migrate",
@@ -25,8 +26,6 @@
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
     "express-winston": "^4.2.0",
-    "faker": "^5.5.3",
-    "glob": "^8.0.1",
     "jsdoc": "^3.6.10",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
@@ -35,15 +34,14 @@
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.19.0",
-    "sinon": "^13.0.2",
     "stoppable": "^1.1.0",
-    "supertest": "^6.2.3",
     "uuid": "^8.3.2",
     "winston": "^3.7.2"
   },
   "devDependencies": {
-    "ava": "^4.2.0",
+    "@faker-js/faker": "^6.3.1",
     "babel-eslint": "^10.1.0",
+    "c8": "^7.11.3",
     "cli-color": "^2.0.2",
     "eslint": "^8.14.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -55,6 +53,8 @@
     "nodemon": "^2.0.16",
     "prettier": "^2.6.2",
     "sequelize-cli": "^6.4.1",
+    "sinon": "^14.0.0",
+    "vitest": "^0.12.6",
     "yargs": "^17.5.0"
   }
 }
