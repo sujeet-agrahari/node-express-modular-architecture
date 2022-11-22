@@ -196,7 +196,7 @@ const getUser = async (userId) => {
 
 Request data is validated using [Joi](https://joi.dev/). Check the [documentation](https://joi.dev/api/) for more details on how to write Joi validation schemas.
 
-The validation schemas are defined in the `src/validations` directory and are used in the routes by providing them as parameters to the `validate` middleware.
+The validation schemas are defined in the `src/components/{eachComponent}/validations` directory and are used in the routes by providing them as parameters to the `validate` middleware.
 
 ```javascript
 router.post(
