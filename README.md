@@ -165,7 +165,7 @@ It will log errors, debugs, and infos on console in `development` mode,  and in 
 
 The error handling middleware sends an error response, which has the following format:
 
-```json
+```
 {
 error: {
 	 "code": 404,
