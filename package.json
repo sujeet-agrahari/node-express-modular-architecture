@@ -1,7 +1,7 @@
 {
-  "name": "NITTI",
+  "name": "node-express-modular-architecture",
   "version": "1.0.0",
-  "description": "Backend APIs for NITTI",
+  "description": "A modular project architecture for node express apis.",
   "main": "./src/server.js",
   "scripts": {
     "test": "NODE_CONFIG_DIR=./src/config vitest --run --reporter verbose",
