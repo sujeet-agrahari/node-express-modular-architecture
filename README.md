@@ -11,8 +11,8 @@ If you would still prefer to do the installation manually, follow these steps:
 Clone the repo:
 
 ```bash
-git clone --depth 1 https://github.com/sujeet-agrahari/node-express-clean-architecture.git
-cd node-express-clean-architecture
+git clone --depth 1 https://github.com/sujeet-agrahari/node-express-modular-architecture.git
+cd node-express-modular-architecture
 npx rimraf ./.git
 ```
 
@@ -132,7 +132,7 @@ src\
  |--server.js       # App entry point
 ```
 ## CLI Support
-node-express-clean-architecture comes with `cli` support. Instead of creating components and files manully you can use command line tool to automate the process.
+node-express-modular-architecture comes with `cli` support. Instead of creating components and files manully you can use command line tool to automate the process.
 
 To create a new component simply run,
 ```
