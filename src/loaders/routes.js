@@ -1,6 +1,6 @@
 // Routes
 const { API_PREFIX } = require('config');
-const { AuthRoutes } = require('../components/Auth/auth.module');
+const { AuthRoutes } = require('../modules/Auth/auth.module');
 
 const routes = [
   {

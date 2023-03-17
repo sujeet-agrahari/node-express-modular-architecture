@@ -1,4 +1,4 @@
-const { verifyJWT } = require('../components/Auth/jwt.service');
+const { verifyJWT } = require('../modules/Auth/jwt.service');
 const { UnauthorizedError } = require('../utils/api-errors');
 
 const decodeToken = async (header) => {
