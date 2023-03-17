@@ -3,9 +3,9 @@ const { faker } = require('@faker-js/faker');
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { NotFoundError } from '../../../src/utils/api-errors';
 const bcrypt = require('bcryptjs');
-const JwtService = require('../../../src/components/Auth/jwt.service');
-const AuthService = require('../../../src/components/Auth/auth.service');
-const { generateJWT } = require('../../../src/components/Auth/jwt.service');
+const JwtService = require('../../../src/modules/Auth/jwt.service');
+const AuthService = require('../../../src/modules/Auth/auth.service');
+const { generateJWT } = require('../../../src/modules/Auth/jwt.service');
 const { User } = require('../../../src/db/models');
 const fakeUser = require('../../fixtures/user.fixture');
 

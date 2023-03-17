@@ -2,9 +2,9 @@ const sinon = require('sinon');
 const { faker } = require('@faker-js/faker');
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 
-const AuthController = require('../../../src/components/Auth/auth.controller');
-const AuthService = require('../../../src/components/Auth/auth.service');
-const { generateJWT } = require('../../../src/components/Auth/jwt.service');
+const AuthController = require('../../../src/modules/Auth/auth.controller');
+const AuthService = require('../../../src/modules/Auth/auth.service');
+const { generateJWT } = require('../../../src/modules/Auth/jwt.service');
 
 describe('AuthController Tests', async () => {
   let sandbox;
