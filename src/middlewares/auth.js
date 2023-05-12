@@ -1,4 +1,4 @@
-const { verifyJWT } = require('../modules/Auth/jwt.service');
+const JwtService = require('../modules/auth/jwt.service');
 const { UnauthorizedError } = require('../utils/api-errors');
 
 const decodeToken = async (header) => {
@@ -6,7 +6,7 @@ const decodeToken = async (header) => {
     throw new UnauthorizedError('Authorization header missing');
   }
   const token = header.replace('Bearer ', '');
-  const payload = await verifyJWT({ token });
+  const payload = await JwtService.verifyJWT({ token });
   return payload;
 };
 
