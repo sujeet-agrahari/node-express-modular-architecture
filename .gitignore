@@ -3,6 +3,7 @@ node_modules
 .idea
 logs
 coverage
+.DS_Store
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
