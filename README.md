@@ -22,7 +22,7 @@ npx rimraf ./.git
 Install the dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Set the environment variables:
@@ -67,14 +67,14 @@ Set the environment variables:
 Running locally:
 
 ```bash
-npm start 
+pnpm start 
 ```
 
 Running in production:
 
 ```bash
 # set NODE_ENV=production in .env 
-npm start 
+pnpm start 
 ```
 Docker:
 
@@ -90,10 +90,10 @@ Linting:
 
 ```bash
 # run ESLint
-npm run lint
+pnpm run lint
 
 # fix ESLint errors
-npm run lint:fix
+pnpm run lint:fix
 ```
 
 ## Environment Variables
@@ -171,10 +171,10 @@ The error handling middleware sends an error response, which has the following f
 
 ```
 {
-error: {
-	 "code": 404,
-     "message": "Not found"
-   }
+  error: {
+    "code": 404,
+    "message": "Not found"
+  }
 }
 ```
 
