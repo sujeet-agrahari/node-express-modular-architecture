@@ -41,7 +41,7 @@ module.exports = {
   getComponentPath(componentName) {
     return (
       args.componentPath ||
-      path.resolve(process.cwd(), `src/components/${componentName}`)
+      path.resolve(process.cwd(), `src/modules/${componentName}`)
     );
   },
 
