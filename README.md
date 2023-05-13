@@ -163,10 +163,6 @@ All errors are captured, logged and managed through one file: `src/middlewares/e
 It will log errors, debugs, and infos on console in `development` mode,  and in production mode it also logs to files: `logs/errors.log` and `logs/combined.log` 
 
 
-
-
-`
-
 The error handling middleware sends an error response, which has the following format:
 
 ```
