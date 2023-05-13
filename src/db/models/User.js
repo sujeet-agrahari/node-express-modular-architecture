@@ -9,18 +9,28 @@ const bcrypt = require('bcryptjs');
  * @returns
  */
 module.exports = (sequelize, DataTypes) => {
+  /**
+   *
+   */
   class User extends Model {
     // with static add custom class method
+    /**
+     *
+     * @param models
+     */
     static associate(models) {
       // define association here
       if (models.Student) {
         models.User.hasOne(models.Student, {
-          foreignKey: 'userId'
+          foreignKey: 'userId',
         });
       }
     }
 
     // add instance method here, below overrides toJSON()
+    /**
+     *
+     */
     toJSON() {
       const user = { ...this.dataValues };
       delete user.password;
@@ -35,20 +45,20 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          is: /^[6-9]\d{9}$/
-        }
+          is: /^[6-9]\d{9}$/,
+        },
       },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notNull: true,
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       isDeleted: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
       },
       role: {
         type: DataTypes.STRING,
@@ -57,9 +67,9 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['Student', 'Teacher']]
-        }
-      }
+          isIn: [['Student', 'Teacher']],
+        },
+      },
     },
     {
       sequelize,
@@ -67,12 +77,16 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'User',
       hooks: {
         // before validate will be called before beforeCreate, so it will throw validation error if used beforeCreate
+        /**
+         *
+         * @param user
+         */
         beforeValidate: async (user) => {
           if (user.password) {
             user.password = await bcrypt.hash(user.password, 8);
           }
-        }
-      }
+        },
+      },
     }
   );
   return User;

@@ -13,5 +13,5 @@ module.exports = {
   badJsonHandler,
   notFoundHandler,
   makeExpressCallback,
-  makeValidatorCallback
+  makeValidatorCallback,
 };

@@ -1,6 +1,9 @@
 const router = require('express').Router();
 
-const { makeExpressCallback, makeValidatorCallback } = require('../../middlewares');
+const {
+  makeExpressCallback,
+  makeValidatorCallback,
+} = require('../../middlewares');
 
 // validator
 const AuthValidator = require('./auth.validator');
@@ -17,11 +20,11 @@ const routes = require('./auth.routes')({
   AuthController,
   AuthValidator,
   makeValidatorCallback,
-  makeExpressCallback
+  makeExpressCallback,
 });
 
 module.exports = {
   AuthController,
   AuthService,
-  AuthRoutes: routes
+  AuthRoutes: routes,
 };

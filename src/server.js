@@ -33,6 +33,11 @@ server.listen(port);
  * Event listener for HTTP server "error" event.
  */
 
+/**
+ * Handle server errors.
+ * @param {Error} error - The error to handle.
+ * @throws {Error} - If the error is not a listen error or is not a known error code.
+ */
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -59,6 +64,9 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
+/**
+ *
+ */
 function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
@@ -70,12 +78,18 @@ server.on('listening', onListening);
 
 // quit on ctrl+c when running docker in terminal
 process.on('SIGINT', async () => {
-  console.info('Got SIGINT (aka ctrl+c in docker). Graceful shutdown', new Date().toISOString());
+  console.info(
+    'Got SIGINT (aka ctrl+c in docker). Graceful shutdown',
+    new Date().toISOString()
+  );
   await gracefulShutdown(stoppable(server));
 });
 
 // quit properly on docker stop
 process.on('SIGTERM', async () => {
-  console.log('Got SIGTERM (docker container stop).Graceful shutdown', new Date().toISOString());
+  console.log(
+    'Got SIGTERM (docker container stop).Graceful shutdown',
+    new Date().toISOString()
+  );
   await gracefulShutdown(stoppable(server));
 });

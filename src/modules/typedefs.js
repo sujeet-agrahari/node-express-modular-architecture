@@ -1,45 +1,52 @@
 /**
- * Context
- * @typedef {Object} Context
- * @property {String} userId
- * @property {String} role
- * @property {String} accessToken
+ * Represents a context object.
+ * @typedef {object} Context
+ * @property {string} userId - The user ID.
+ * @property {string} role - The user role.
+ * @property {string} accessToken - The access token.
  */
 
 /**
- * ExpressRequest
+ * Represents an Express request object.
  * @typedef {import('express').Request} ExpressRequest
  */
 
 /**
- * ExpressResponse
+ * Represents an Express response object.
  * @typedef {import('express').Response} ExpressResponse
  */
 
 /**
- * ExpressNextFunction
+ * Represents an Express next function.
  * @typedef {import('express').NextFunction} ExpressNextFunction
  */
 
 /**
- * ControllerResponse
- * @typedef {Object} ControllerResponse
- * @property {Number} statusCode
- * @property {{ data: (Object | Array )}} body
+ * Represents a controller response object.
+ * @typedef {object} ControllerResponse
+ * @property {number} statusCode - The HTTP status code.
+ * @property {{data: (object | Array)}} body - The response body.
  */
 
 /**
- * ExpressRouter
- * @typedef {import('express').Router} ExpressRouter
- */
-
-/**
+ * A function that creates an Express validator callback.
  * @typedef {Function} makeValidatorCallback
- * @param {Function} validator
- * @returns {Function(ExpressRequest, ExpressResponse, ExpressNextFunction): undefined}
+ * @param {Function} validator - The validation function.
+ * @returns {function(ExpressRequest, ExpressResponse, ExpressNextFunction): void} - The Express validator callback.
  */
 
 /**
+ * A function that creates an Express callback.
  * @typedef {Function} makeExpressCallback
- * @param {Function} validator
+ * @param {Function} validator - The validation function.
+ */
+
+/**
+ * Represents a user data transfer object.
+ * @typedef {object} UserDto
+ * @property {string} id - The user ID.
+ * @property {string} phone - The user phone number.
+ * @property {string} password - The user password.
+ * @property {Date} createdAt - The date the user was created.
+ * @property {Date} updatedAt - The date the user was last updated.
  */

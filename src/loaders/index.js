@@ -3,5 +3,5 @@ const Routes = require('./routes');
 
 module.exports = {
   Config,
-  Routes
+  Routes,
 };

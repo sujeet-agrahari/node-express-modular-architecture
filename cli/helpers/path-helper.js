@@ -5,22 +5,50 @@ const getYArgs = require('../core/yargs');
 const args = getYArgs().argv;
 
 module.exports = {
+  /**
+   *
+   * @param type
+   * @param name
+   * @param options
+   */
   getFileName(type, name, options) {
-    return this.addFileExtension([getCurrentYYYYMMDDHHmms(), name || `unnamed-${type}`].join('-'), options);
+    return this.addFileExtension(
+      [getCurrentYYYYMMDDHHmms(), name || `unnamed-${type}`].join('-'),
+      options
+    );
   },
 
+  /**
+   *
+   */
   getFileExtension() {
     return 'js';
   },
 
+  /**
+   *
+   * @param basename
+   * @param options
+   */
   addFileExtension(basename, options) {
     return [basename, this.getFileExtension(options)].join('.');
   },
 
+  /**
+   *
+   * @param componentName
+   */
   getComponentPath(componentName) {
-    return args.componentPath || path.resolve(process.cwd(), `src/components/${componentName}`);
+    return (
+      args.componentPath ||
+      path.resolve(process.cwd(), `src/components/${componentName}`)
+    );
   },
 
+  /**
+   *
+   * @param pathToCheck
+   */
   existsSync(pathToCheck) {
     if (fs.accessSync) {
       try {
@@ -32,5 +60,5 @@ module.exports = {
     } else {
       return fs.existsSync(pathToCheck);
     }
-  }
+  },
 };

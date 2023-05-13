@@ -1,3 +1,7 @@
+/**
+ *
+ * @param controller
+ */
 module.exports = (controller) => async (req, res) => {
   const httpRequest = {
     body: req.body,
@@ -10,8 +14,8 @@ module.exports = (controller) => async (req, res) => {
       'Content-Type': req.get('Content-Type'),
       Authorization: req.get('Authorization'),
       Referer: req.get('referer'),
-      'User-Agent': req.get('User-Agent')
-    }
+      'User-Agent': req.get('User-Agent'),
+    },
   };
   const httpResponse = await controller(httpRequest);
   if (httpResponse.headers) res.set(httpResponse.headers);

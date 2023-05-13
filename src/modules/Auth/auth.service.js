@@ -5,20 +5,19 @@ const { BadRequestError, NotFoundError } = require('../../utils/api-errors');
 
 const AuthService = {
   /**
-   * Login a user and generate token.
+   * Logs in a user and generates a token.
    * @async
-   * @method
+   * @function
    * @param {UserDto} requestBody - Request Body
    * @returns {Context} Context object
-   * @throws {NotFoundError} When the user is not found.
+   * @throws {NotFoundError} If the user is not found.
    */
-
   doLogin: async (requestBody) => {
     const { phone, password } = requestBody;
     const user = await User.findOne({
       where: {
-        phone
-      }
+        phone,
+      },
     });
     if (!user) {
       throw new NotFoundError('User not found');
@@ -30,17 +29,17 @@ const AuthService = {
 
     const payload = {
       userId: user.id,
-      role: user.role
+      role: user.role,
     };
 
     const accessToken = await JwtService.generateJWT({
-      payload
+      payload,
     });
     return {
       accessToken,
-      ...payload
+      ...payload,
     };
-  }
+  },
 };
 
 module.exports = AuthService;

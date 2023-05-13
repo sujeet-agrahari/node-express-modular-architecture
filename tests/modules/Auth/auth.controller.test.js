@@ -1,22 +1,27 @@
+import { describe, it, expect, beforeEach, afterEach, beforeAll } from 'vitest';
+
 const sinon = require('sinon');
 const { faker } = require('@faker-js/faker');
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 
-const AuthController = require('../../../src/modules/Auth/auth.controller');
-const AuthService = require('../../../src/modules/Auth/auth.service');
-const { generateJWT } = require('../../../src/modules/Auth/jwt.service');
+const AuthController = require('../../../src/modules/auth/auth.controller');
+const AuthService = require('../../../src/modules/auth/auth.service');
+const JwtService = require('../../../src/modules/auth/jwt.service');
 
-describe('AuthController Tests', async () => {
+describe('AuthController Tests', () => {
   let sandbox;
 
   const payload = {
     userId: faker.datatype.uuid(),
-    role: 'User'
+    role: 'User',
   };
 
-  const jwtToken = await generateJWT({
-    payload,
-    secretKey: 'secretKey'
+  let jwtToken;
+
+  beforeAll(async () => {
+    jwtToken = await JwtService.generateJWT({
+      payload,
+      secretKey: 'secretKey',
+    });
   });
 
   beforeEach(() => {
@@ -33,20 +38,20 @@ describe('AuthController Tests', async () => {
       const httpRequest = {
         body: {
           phone: faker.phone.phoneNumber('##########'),
-          password: faker.internet.password(8)
-        }
+          password: faker.internet.password(8),
+        },
       };
 
       const loginData = {
         ...payload,
-        accessToken: jwtToken
+        accessToken: jwtToken,
       };
 
       const expected = {
         statusCode: 200,
         body: {
-          data: loginData
-        }
+          data: loginData,
+        },
       };
       sandbox.stub(AuthService, 'doLogin').resolves(loginData);
 
@@ -54,7 +59,7 @@ describe('AuthController Tests', async () => {
       const result = await AuthController.login(httpRequest);
 
       // Assert
-      expect(result).to.deep.equal(expected);
+      expect(result).toEqual(expected);
     });
   });
 });

@@ -2,6 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const helpers = require('./index');
 
+/**
+ *
+ * @param folderName
+ * @param folder
+ * @param force
+ */
 function createFolder(folderName, folder, force) {
   if (force && fs.existsSync(folder) === true) {
     helpers.view.log(`Deleting the ${folderName} folder. (--force)`);
@@ -25,7 +31,9 @@ function createFolder(folderName, folder, force) {
   try {
     if (fs.existsSync(folder) === false) {
       helpers.asset.mkdirp(folder);
-      helpers.view.log(`Successfully created ${folderName} folder at "${folder}".`);
+      helpers.view.log(
+        `Successfully created ${folderName} folder at "${folder}".`
+      );
     } else {
       helpers.view.log(`${folderName} folder at "${folder}" already exists.`);
     }
@@ -35,9 +43,23 @@ function createFolder(folderName, folder, force) {
 }
 
 const init = {
+  /**
+   *
+   * @param componentName
+   * @param force
+   */
   createComponentFolder: (componentName, force) => {
-    createFolder(componentName, helpers.path.getComponentPath(componentName), force);
+    createFolder(
+      componentName,
+      helpers.path.getComponentPath(componentName),
+      force
+    );
   },
+  /**
+   *
+   * @param componentName
+   * @param force
+   */
   createModuleFile: (componentName, force) => {
     const modulePath = helpers.path.getComponentPath(componentName);
     const moduleFilePath = path.resolve(
@@ -56,15 +78,20 @@ const init = {
           'module.js',
           {
             name: componentName,
-            nameLower: componentName.toLowerCase()
+            nameLower: componentName.toLowerCase(),
           },
           {
-            beautify: false
+            beautify: false,
           }
         )
       );
     }
   },
+  /**
+   *
+   * @param componentName
+   * @param force
+   */
   createControllerFile: (componentName, force) => {
     const modulePath = helpers.path.getComponentPath(componentName);
     const moduleFilePath = path.resolve(
@@ -83,15 +110,20 @@ const init = {
           'controller.js',
           {
             name: componentName,
-            nameLower: componentName.toLowerCase()
+            nameLower: componentName.toLowerCase(),
           },
           {
-            beautify: false
+            beautify: false,
           }
         )
       );
     }
   },
+  /**
+   *
+   * @param componentName
+   * @param force
+   */
   createServiceFile: (componentName, force) => {
     const modulePath = helpers.path.getComponentPath(componentName);
     const moduleFilePath = path.resolve(
@@ -110,15 +142,20 @@ const init = {
           'service.js',
           {
             name: componentName,
-            nameLower: componentName.toLowerCase()
+            nameLower: componentName.toLowerCase(),
           },
           {
-            beautify: false
+            beautify: false,
           }
         )
       );
     }
   },
+  /**
+   *
+   * @param componentName
+   * @param force
+   */
   createRoutesFile: (componentName, force) => {
     const modulePath = helpers.path.getComponentPath(componentName);
     const moduleFilePath = path.resolve(
@@ -137,15 +174,20 @@ const init = {
           'routes.js',
           {
             name: componentName,
-            nameLower: componentName.toLowerCase()
+            nameLower: componentName.toLowerCase(),
           },
           {
-            beautify: false
+            beautify: false,
           }
         )
       );
     }
   },
+  /**
+   *
+   * @param componentName
+   * @param force
+   */
   createValidatorFile: (componentName, force) => {
     const modulePath = helpers.path.getComponentPath(componentName);
     const moduleFilePath = path.resolve(
@@ -164,15 +206,15 @@ const init = {
           'validator.js',
           {
             name: componentName,
-            nameLower: componentName.toLowerCase()
+            nameLower: componentName.toLowerCase(),
           },
           {
-            beautify: false
+            beautify: false,
           }
         )
       );
     }
-  }
+  },
 };
 
 module.exports = init;

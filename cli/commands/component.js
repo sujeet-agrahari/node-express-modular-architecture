@@ -1,6 +1,10 @@
 const helpers = require('../helpers');
 const { baseOptions } = require('../core/yargs');
 
+/**
+ *
+ * @param args
+ */
 function initComponent(args) {
   helpers.init.createComponentFolder(args.name, !!args.force);
   helpers.init.createModuleFile(args.name, !!args.force);
@@ -11,13 +15,21 @@ function initComponent(args) {
 }
 
 module.exports = {
+  /**
+   *
+   * @param yargs
+   */
   builder: (yargs) =>
     baseOptions(yargs).option('force', {
       describe: 'Will drop the existing component and re-create it',
       type: 'boolean',
-      default: false
+      default: false,
     }).argv,
 
+  /**
+   *
+   * @param argv
+   */
   handler: async (argv) => {
     switch (argv._[0]) {
       case 'init:component':
@@ -27,5 +39,5 @@ module.exports = {
         break;
     }
     process.exit(0);
-  }
+  },
 };

@@ -12,7 +12,11 @@ const { requestLogger } = require('./support/logger');
 // error handler
 require('express-async-errors');
 
-const { errorHandler, badJsonHandler, notFoundHandler } = require('./middlewares');
+const {
+  errorHandler,
+  badJsonHandler,
+  notFoundHandler,
+} = require('./middlewares');
 
 // enable cors
 app.use(cors());

@@ -4,8 +4,8 @@ const AuthController = {
   /**
    * Handle logging in user.
    * @async
-   * @method
-   * @param {ExpressRequest} httpRequest
+   * @function
+   * @param {ExpressRequest} httpRequest incoming http request
    * @returns {Promise.<ControllerResponse> }
    */
   login: async (httpRequest) => {
@@ -13,10 +13,10 @@ const AuthController = {
     return {
       statusCode: 200,
       body: {
-        data: loginData
-      }
+        data: loginData,
+      },
     };
-  }
+  },
 };
 
 module.exports = AuthController;

@@ -12,39 +12,43 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         defaultValue: Sequelize.literal('gen_random_uuid()'),
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
       },
       phone: {
         type: Sequelize.STRING(10),
-        allowNull: false
+        allowNull: false,
       },
       password: {
         type: Sequelize.STRING(80),
-        allowNull: false
+        allowNull: false,
       },
       isDeleted: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
       },
       role: {
         type: Sequelize.ENUM('Admin', 'User'),
-        defaultValue: 'User'
+        defaultValue: 'User',
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
     await queryInterface.addConstraint(TABLE_WITH_SCHEMA, {
       type: 'unique',
-      fields: ['phone']
+      fields: ['phone'],
     });
   },
+  /**
+   *
+   * @param queryInterface
+   */
   async down(queryInterface) {
     await queryInterface.dropTable(TABLE_WITH_SCHEMA);
-  }
+  },
 };

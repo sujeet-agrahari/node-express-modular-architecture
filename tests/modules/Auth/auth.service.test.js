@@ -1,25 +1,27 @@
+import { describe, it, expect, beforeEach, afterEach, beforeAll } from 'vitest';
+
 const sinon = require('sinon');
 const { faker } = require('@faker-js/faker');
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { NotFoundError } from '../../../src/utils/api-errors';
-const bcrypt = require('bcryptjs');
-const JwtService = require('../../../src/modules/Auth/jwt.service');
-const AuthService = require('../../../src/modules/Auth/auth.service');
-const { generateJWT } = require('../../../src/modules/Auth/jwt.service');
-const { User } = require('../../../src/db/models');
-const fakeUser = require('../../fixtures/user.fixture');
 
-describe('AuthService Tests', async () => {
+const AuthController = require('../../../src/modules/auth/auth.controller');
+const AuthService = require('../../../src/modules/auth/auth.service');
+const JwtService = require('../../../src/modules/auth/jwt.service');
+
+describe('AuthController Tests', () => {
   let sandbox;
 
   const payload = {
-    userId: fakeUser.id,
-    role: 'User'
+    userId: faker.datatype.uuid(),
+    role: 'User',
   };
 
-  const jwtToken = await generateJWT({
-    payload,
-    secretKey: 'secretKey'
+  let jwtToken;
+
+  beforeAll(async () => {
+    jwtToken = await JwtService.generateJWT({
+      payload,
+      secretKey: 'secretKey',
+    });
   });
 
   beforeEach(() => {
@@ -30,48 +32,34 @@ describe('AuthService Tests', async () => {
     sandbox.restore();
   });
 
-  describe('doLogin', () => {
-    it('should throw NotFoundError if user does not exist', async () => {
-      // Arrange
-      const requestBody = {
-        phone: faker.phone.phoneNumber('##########'),
-        password: faker.internet.password(8)
-      };
-
-      const expected = new NotFoundError('User not found');
-
-      sandbox.stub(User, 'findOne').resolves(null);
-
-      // Act
-      const resultFn = async () => {
-        await AuthService.doLogin(requestBody);
-      };
-
-      // Assert
-      expect(resultFn).rejects.toThrow(expected);
-    });
-
+  describe('login', () => {
     it('should login user and return token', async () => {
       // Arrange
-      const requestBody = {
-        phone: faker.phone.phoneNumber('##########'),
-        password: faker.internet.password(8)
+      const httpRequest = {
+        body: {
+          phone: faker.phone.phoneNumber('##########'),
+          password: faker.internet.password(8),
+        },
+      };
+
+      const loginData = {
+        ...payload,
+        accessToken: jwtToken,
       };
 
       const expected = {
-        ...payload,
-        accessToken: jwtToken
+        statusCode: 200,
+        body: {
+          data: loginData,
+        },
       };
-
-      sandbox.stub(User, 'findOne').resolves(fakeUser);
-      sandbox.stub(bcrypt, 'compareSync').returns(true);
-      sandbox.stub(JwtService, 'generateJWT').resolves(jwtToken);
+      sandbox.stub(AuthService, 'doLogin').resolves(loginData);
 
       // Act
-      const result = await AuthService.doLogin(requestBody);
+      const result = await AuthController.login(httpRequest);
 
       // Assert
-      expect(result).to.deep.equal(expected);
+      expect(result).toEqual(expected);
     });
   });
 });

@@ -1,19 +1,30 @@
 module.exports = {
-  extends: ['airbnb-base', 'plugin:prettier/recommended', 'plugin:jsdoc/recommended', 'plugin:vitest/recommended'],
+  extends: [
+    'airbnb-base',
+    'plugin:prettier/recommended',
+    'plugin:vitest/recommended',
+  ],
   env: {
     browser: true,
     commonjs: true,
-    es6: true
+    es6: true,
   },
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
+    SharedArrayBuffer: 'readonly',
   },
   parserOptions: {
     ecmaVersion: 11,
-    sourceType: 'module'
+    sourceType: 'module',
   },
-  plugins: ['prettier', 'jsdoc'],
+  plugins: ['prettier', 'jsdoc', 'vitest'],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
+      },
+    },
+  },
   rules: {
     'prettier/prettier': [
       'error',
@@ -23,8 +34,8 @@ module.exports = {
         bracketSpacing: true,
         jsxBracketSameLine: false,
         printWidth: 80,
-        tabWidth: 2
-      }
+        tabWidth: 2,
+      },
     ],
     'no-console': 'warn',
     'no-debugger': 'warn',
@@ -39,9 +50,10 @@ module.exports = {
           MethodDefinition: true,
           ClassDeclaration: true,
           ArrowFunctionExpression: true,
-          FunctionExpression: true
-        }
-      }
-    ]
-  }
+          FunctionExpression: true,
+        },
+      },
+    ],
+    'vitest/valid-expect': 'error',
+  },
 };
