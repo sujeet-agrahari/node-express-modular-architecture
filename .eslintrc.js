@@ -2,12 +2,13 @@ module.exports = {
   extends: [
     'airbnb-base',
     'plugin:prettier/recommended',
-    'plugin:vitest/recommended',
+    'plugin:jest/recommended',
   ],
   env: {
     browser: true,
     commonjs: true,
     es6: true,
+    "jest/globals": true,
   },
   globals: {
     Atomics: 'readonly',
@@ -17,7 +18,7 @@ module.exports = {
     ecmaVersion: 11,
     sourceType: 'module',
   },
-  plugins: ['prettier', 'jsdoc', 'vitest'],
+  plugins: ['prettier', 'jsdoc', 'jest'],
   settings: {
     'import/resolver': {
       node: {
@@ -54,6 +55,14 @@ module.exports = {
         },
       },
     ],
-    'vitest/valid-expect': 'error',
+    'jest/expect-expect': 'error',
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/prefer-to-be-null': 'warn',
+    'jest/prefer-to-be-undefined': 'warn',
+    'jest/prefer-expect-assertions': 'warn',
+    'jest/valid-expect': 'error',
   },
 };

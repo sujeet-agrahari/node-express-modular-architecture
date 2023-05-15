@@ -1,15 +1,10 @@
-import { describe, it, expect, beforeEach, afterEach, beforeAll } from 'vitest';
-
-const sinon = require('sinon');
 const { faker } = require('@faker-js/faker');
 
 const AuthController = require('../../../src/modules/auth/auth.controller');
 const AuthService = require('../../../src/modules/auth/auth.service');
 const JwtService = require('../../../src/modules/auth/jwt.service');
 
-describe('AuthController Tests', () => {
-  let sandbox;
-
+describe('AuthController', () => {
   const payload = {
     userId: faker.datatype.uuid(),
     role: 'User',
@@ -24,16 +19,13 @@ describe('AuthController Tests', () => {
     });
   });
 
-  beforeEach(() => {
-    sandbox = sinon.createSandbox();
-  });
-
   afterEach(() => {
-    sandbox.restore();
+    jest.restoreAllMocks();
   });
 
   describe('login', () => {
     it('should login user and return token', async () => {
+      expect.assertions(2);
       // Arrange
       const httpRequest = {
         body: {
@@ -53,13 +45,16 @@ describe('AuthController Tests', () => {
           data: loginData,
         },
       };
-      sandbox.stub(AuthService, 'doLogin').resolves(loginData);
+
+      const doLoginMock = jest.fn().mockResolvedValue(loginData);
+      AuthService.doLogin = doLoginMock;
 
       // Act
       const result = await AuthController.login(httpRequest);
 
       // Assert
       expect(result).toEqual(expected);
+      expect(doLoginMock).toHaveBeenCalledWith(httpRequest.body);
     });
   });
 });

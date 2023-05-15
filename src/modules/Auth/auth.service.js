@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const { User } = require('../../db/models');
+const User = require('../../db/models/User');
 const JwtService = require('./jwt.service');
 const { BadRequestError, NotFoundError } = require('../../utils/api-errors');
 

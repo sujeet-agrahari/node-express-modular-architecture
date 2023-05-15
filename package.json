@@ -4,7 +4,7 @@
   "description": "A modular project architecture for node express apis.",
   "main": "./src/server.js",
   "scripts": {
-    "test": "vitest --config ./vitest.config.js --run --reporter verbose",
+    "test": "jest --config ./jest.config.js --coverage",
     "coverage": "vitest run --coverage",
     "start": "nodemon -L ./src/server.js",
     "lint": "./node_modules/.bin/eslint .",
@@ -40,23 +40,21 @@
   "devDependencies": {
     "@faker-js/faker": "^6.3.1",
     "babel-eslint": "^10.1.0",
-    "c8": "^7.11.3",
     "cli-color": "^2.0.2",
     "eslint": "^8.14.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-jsdoc": "^44.2.3",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vitest": "^0.2.2",
     "fs-extra": "^10.1.0",
+    "jest": "^29.5.0",
     "js-beautify": "^1.14.3",
     "jsdoc": "^4.0.2",
     "nodemon": "^2.0.16",
     "prettier": "^2.6.2",
     "sequelize-cli": "^6.4.1",
-    "sinon": "^14.0.0",
-    "vitest": "^0.31.0",
+    "sequelize-mock": "^0.10.2",
     "yargs": "^17.5.0"
   }
 }

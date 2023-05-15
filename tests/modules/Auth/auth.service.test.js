@@ -1,62 +1,41 @@
-import { describe, it, expect, beforeEach, afterEach, beforeAll } from 'vitest';
+const bcrypt = require('bcryptjs');
 
-const sinon = require('sinon');
 const { faker } = require('@faker-js/faker');
 
-const AuthController = require('../../../src/modules/auth/auth.controller');
 const AuthService = require('../../../src/modules/auth/auth.service');
 const JwtService = require('../../../src/modules/auth/jwt.service');
 
-describe('AuthController Tests', () => {
-  let sandbox;
-
-  const payload = {
-    userId: faker.datatype.uuid(),
-    role: 'User',
+jest.mock('../../../src/db/models/User', () => {
+  const User = {
+    findOne: jest.fn().mockResolvedValue({ id: 'fake-id', role: 'fake-role' }),
   };
+  return User;
+});
 
-  let jwtToken;
-
-  beforeAll(async () => {
-    jwtToken = await JwtService.generateJWT({
-      payload,
-      secretKey: 'secretKey',
-    });
-  });
-
-  beforeEach(() => {
-    sandbox = sinon.createSandbox();
-  });
-
-  afterEach(() => {
-    sandbox.restore();
-  });
-
+describe('AuthService', () => {
   describe('login', () => {
     it('should login user and return token', async () => {
       // Arrange
-      const httpRequest = {
-        body: {
-          phone: faker.phone.phoneNumber('##########'),
-          password: faker.internet.password(8),
-        },
+      expect.assertions(1);
+      const requestBody = {
+        phone: faker.phone.phoneNumber('##########'),
+        password: faker.internet.password(8),
       };
-
-      const loginData = {
-        ...payload,
-        accessToken: jwtToken,
+      const fakeUser = {
+        userId: 'fake-id',
+        role: 'fake-role',
       };
+      const fakeAccessToken = 'fake-access-token';
+      jest.spyOn(bcrypt, 'compareSync').mockImplementation(() => true);
+      jest.spyOn(JwtService, 'generateJWT').mockResolvedValue(fakeAccessToken);
 
       const expected = {
-        statusCode: 200,
-        body: {
-          data: loginData,
-        },
+        ...fakeUser,
+        accessToken: fakeAccessToken,
       };
-      sandbox.stub(AuthService, 'doLogin').resolves(loginData);
 
       // Act
-      const result = await AuthController.login(httpRequest);
+      const result = await AuthService.doLogin(requestBody);
 
       // Assert
       expect(result).toEqual(expected);
