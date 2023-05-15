@@ -2,7 +2,7 @@
 # Node Express Modular Architecture
 A boilerplate/starter project for quickly building RESTful APIs using Node.js, Express, and sequelize.
 
-It incorporates the latest technologies, such as `pnpm` for package management, `vitest` for test cases, and `eslint` for enforcing coding guidelines and best practices.
+It incorporates the latest technologies, such as `pnpm` for package management, `jest` for test cases, and `eslint` for enforcing coding guidelines and best practices.
 
 
 By running a single command, you will get a production-ready Node.js app installed and fully configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, unit and integration tests, continuous integration, docker support, API documentation, pagination, etc. For more details, check the features list below.
@@ -33,18 +33,25 @@ Set the environment variables:
 
 ## Table of Contents
 
-- [Features](#features)
-- [Commands](#commands)
-- [Environment Variables](#environment-variables)
-- [Project Structure](#project-structure)
-- [API Documentation](#api-documentation)
-- [Error Handling](#error-handling)
-- [Validation](#validation)
-- [Authentication](#authentication)
-- [Authorization](#authorization)
-- [Logging](#logging)
-- [Linting](#linting)
-- [Contributing](#contributing)
+- [Node Express Modular Architecture](#node-express-modular-architecture)
+  - [Manual Installation](#manual-installation)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Commands](#commands)
+  - [Environment Variables](#environment-variables)
+  - [Project Structure](#project-structure)
+  - [CLI Support](#cli-support)
+  - [API Documentation](#api-documentation)
+    - [API Endpoints](#api-endpoints)
+  - [Error Handling](#error-handling)
+  - [Validation](#validation)
+  - [Authentication](#authentication)
+  - [Authorization](#authorization)
+  - [Logging](#logging)
+  - [Linting](#linting)
+  - [Contributing](#contributing)
+  - [Inspirations](#inspirations)
+  - [License](#license)
 
 ## Features
 
