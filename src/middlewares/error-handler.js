@@ -13,7 +13,7 @@ const { APIError } = require('../utils/api-errors');
  * @param res
  * @param next
  */
-module.exports = async (error, req, res, _next) => {
+module.exports = (error, req, res, _next) => {
   logger.error(error);
 
   // catch api error
@@ -44,10 +44,11 @@ module.exports = async (error, req, res, _next) => {
     });
   }
   if (error instanceof AggregateError) {
+    const firstErrorMessage = error.errors[0]?.message || 'Unknown error';
     return res.status(400).send({
       error: {
         code: 400,
-        message: error.errors[0].errors.errors[0].message,
+        message: firstErrorMessage,
       },
     });
   }

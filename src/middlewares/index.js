@@ -1,5 +1,5 @@
 const auth = require('./auth');
-const errorHandler = require('./error');
+const errorHandler = require('./error-handler');
 const authorize = require('./authorize');
 const badJsonHandler = require('./validate-json');
 const notFoundHandler = require('./not-found-error');

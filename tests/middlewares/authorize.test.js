@@ -1,7 +1,7 @@
 const authorizeMiddleware = require('../../src/middlewares/authorize');
 const { UnauthorizedError } = require('../../src/utils/api-errors');
 
-describe('middleware', () => {
+describe('authorize middleware', () => {
   let req;
   let res;
   let next;
@@ -28,12 +28,19 @@ describe('middleware', () => {
   });
 
   test('should throw UnauthorizedError if user role is not included in allowed roles', async () => {
-    expect.assertions(1);
+    expect.assertions(2);
+
+    const err = new UnauthorizedError();
 
     req.user.role = 'user';
 
-    await expect(
-      authorizeMiddleware(['admin'])(req, res, next)
-    ).rejects.toThrow(UnauthorizedError);
+    try {
+      await authorizeMiddleware(['admin'])(req, res, next);
+    } catch (error) {
+      // eslint-disable-next-line jest/no-conditional-expect
+      expect(error).toBeInstanceOf(UnauthorizedError);
+      // eslint-disable-next-line jest/no-conditional-expect
+      expect(error.message).toBe(err.message);
+    }
   });
 });
