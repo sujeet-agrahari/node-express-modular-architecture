@@ -30,4 +30,4 @@ jobs:
         with:
           push: true
           tags: |
-            docker.pkg.github.com/${{ github.repository }}/quick-link-service:${{ github.sha }}
+            docker.pkg.github.com/${{ github.repository }}/node-express-modular-architecture:${{ github.sha }}
