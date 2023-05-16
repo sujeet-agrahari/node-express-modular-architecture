@@ -1,12 +1,12 @@
 FROM node:16-alpine AS base
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 EXPOSE 3000
 RUN npm install -g pnpm
 RUN mkdir /app && chown -R node:node /app
 WORKDIR /app
 USER node
 COPY --chown=node:node package.json package-lock*.json ./
-RUN pnpm install && pnpm cache clean --force
+RUN pnpm install
 ENV PATH /app/node_modules/.bin:$PATH
 # check every 30s to ensure this service returns HTTP 200
 HEALTHCHECK --interval=30s CMD node healthcheck.js
