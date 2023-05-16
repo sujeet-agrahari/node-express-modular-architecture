@@ -1,7 +1,7 @@
 FROM node:16-alpine AS base
 ENV NODE_ENV=production
 EXPOSE 3000
-RUN pnpm i pnpm@latest -g
+RUN npm install -g pnpm
 RUN mkdir /app && chown -R node:node /app
 WORKDIR /app
 USER node
