@@ -1,4 +1,4 @@
-FROM node:12-slim as base
+FROM node:16-alpine AS base
 ENV NODE_ENV=production
 EXPOSE 3000
 RUN pnpm i pnpm@latest -g
