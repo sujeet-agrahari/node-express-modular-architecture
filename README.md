@@ -7,6 +7,42 @@ It incorporates the latest technologies, such as `pnpm` for package management, 
 
 By running a single command, you will get a production-ready Node.js app installed and fully configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, unit and integration tests, continuous integration, docker support, API documentation, pagination, etc. For more details, check the features list below.
 
+## Deployment and Production Readiness
+
+This repository is designed to be easily deployed to production environments using Docker. The following steps are performed automatically by the Docker actions configured in this repository:
+
+- **Building Docker Image:** The Docker action builds a Docker image for this application using the provided Dockerfile.
+- **Running Unit Tests:** Before the Docker image is built and pushed, the Docker action runs the unit tests to ensure the codebase is functioning as expected.
+- **Pushing Docker Image:** Once the unit tests pass, the Docker image is pushed to a container registry, making it ready for deployment.
+- **Production Ready:** With the Docker image available in the container registry, this repository is production-ready, and the image can be deployed to production environments at any time.
+
+By leveraging Docker and the automated workflows defined in this repository, you can ensure consistent and reliable deployments of this application, along with the confidence of passing unit tests before moving to production.
+
+### Prerequisites
+
+Before deploying this application using Docker, make sure you have the following prerequisites installed:
+
+- Docker: [Installation Guide](https://docs.docker.com/get-docker/)
+- Container Registry Credentials: Ensure you have the necessary credentials to push Docker images to your container registry.
+
+### Deployment Steps
+
+To deploy this application to a production environment using Docker, follow these steps:
+
+1. Clone this repository: `git clone <repository-url>`
+2. Navigate to the repository's root directory: `cd <repository-folder>`
+3. Build the Docker image: `docker build -t <image-name> .`
+4. Push the Docker image to your container registry: `docker push <image-name>`
+5. Deploy the Docker image to your production environment using the container registry and deployment tooling of your choice.
+
+Make sure to replace `<repository-url>`, `<repository-folder>`, and `<image-name>` with the appropriate values for your setup.
+
+### Continuous Integration and Delivery (CI/CD)
+
+This repository is equipped with continuous integration and delivery capabilities using Docker actions. With every code change and pull request, the defined workflows will automatically run the unit tests and perform the necessary steps for building and pushing the Docker image. This ensures that the application is always production-ready and provides a streamlined process for deploying updates.
+
+To configure or customize the CI/CD workflows, refer to the `.github/workflows` directory in this repository and modify the workflow files according to your requirements.
+
 ## Manual Installation
 
 If you would still prefer to do the installation manually, follow these steps:
@@ -34,6 +70,10 @@ Set the environment variables:
 ## Table of Contents
 
 - [Node Express Modular Architecture](#node-express-modular-architecture)
+  - [Deployment and Production Readiness](#deployment-and-production-readiness)
+    - [Prerequisites](#prerequisites)
+    - [Deployment Steps](#deployment-steps)
+    - [Continuous Integration and Delivery (CI/CD)](#continuous-integration-and-delivery-cicd)
   - [Manual Installation](#manual-installation)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
