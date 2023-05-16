@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "password",
-    "database": "taskmanagement",
+    "username": "mealmate_dev",
+    "password": "mealmate_dev_password",
+    "database": "mealmate",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": 0

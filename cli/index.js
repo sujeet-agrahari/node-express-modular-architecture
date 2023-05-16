@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable no-unused-expressions */
 
 const yargs = require('yargs');
 const helpers = require('./helpers');
