@@ -12,7 +12,7 @@
     "migrate:undo": "sequelize db:migrate:undo",
     "lint:fix": "./node_modules/.bin/eslint . --fix",
     "create:component": "node ./cli init:component",
-    "prepare": "husky install"
+    "prepare": "node_modules/.bin/husky-run install"
   },
   "husky": {
     "hooks": {
