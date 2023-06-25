@@ -1,18 +1,13 @@
 const AppHealthService = require('./app-health.service');
+const helper = require('../../utils/helper');
 
 const AppHealthController = {
   /**
    *
    */
-  getResource: async (httpRequest) => {
-    const appHealthData = await AppHealthService.doGetAppHealthStatus(
-      httpRequest
-    );
-    console.log(appHealthData);
-    return {
-      statusCode: 200,
-      data: appHealthData,
-    };
+  getAppHealth: async (httpRequest) => {
+    const appHealthData = await AppHealthService.doGetAppHealth(httpRequest);
+    return helper.generateResponse(appHealthData);
   },
 };
 

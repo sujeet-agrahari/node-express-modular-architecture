@@ -19,5 +19,5 @@ module.exports = (controller) => async (req, res) => {
   };
   const httpResponse = await controller(httpRequest);
   if (httpResponse.headers) res.set(httpResponse.headers);
-  return res.status(httpResponse.statusCode).send(httpResponse.body);
+  return res.status(httpResponse.statusCode).send(httpResponse.data);
 };

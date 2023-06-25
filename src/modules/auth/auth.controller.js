@@ -1,4 +1,5 @@
 const AuthService = require('./auth.service');
+const helper = require('../../utils/helper');
 
 const AuthController = {
   /**
@@ -10,12 +11,7 @@ const AuthController = {
    */
   login: async (httpRequest) => {
     const loginData = await AuthService.doLogin(httpRequest.body);
-    return {
-      statusCode: 200,
-      body: {
-        data: loginData,
-      },
-    };
+    return helper.generateResponse(loginData);
   },
 };
 

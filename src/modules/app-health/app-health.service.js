@@ -4,7 +4,7 @@ const AppHealthService = {
   /**
    *
    */
-  doGetAppHealthStatus: async () => {
+  doGetAppHealth: async () => {
     const appHealthStatus = {
       database: { status: 'down' },
       app: { status: 'down' },
