@@ -17,7 +17,7 @@ const checkAppHealth = async () => {
       console.log('App is up and running');
       // Additional actions if the app is healthy
     } else {
-      console.log('App is not healthy');
+      console.error('App is not healthy');
       // Additional actions if the app is not healthy
     }
   } catch (error) {

@@ -1,5 +1,5 @@
 FROM node:16-alpine AS base
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 EXPOSE 3000
 RUN npm install -g pnpm
 RUN mkdir /app && chown -R node:node /app
@@ -20,4 +20,4 @@ RUN pnpm install --only=development
 CMD ["nodemon", "server.js"]
 
 FROM source as prod
-CMD ["node", "server.js"]
+CMD ["node", "src/server.js"]
