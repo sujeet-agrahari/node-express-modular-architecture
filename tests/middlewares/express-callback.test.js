@@ -59,7 +59,7 @@ describe('express-callback middleware', () => {
 
     const httpResponse = {
       statusCode: 200,
-      body: {},
+      data: {},
       headers: {
         'Content-Type': 'application/json',
       },
@@ -70,6 +70,6 @@ describe('express-callback middleware', () => {
 
     expect(res.set).toHaveBeenCalledWith(httpResponse.headers);
     expect(res.status).toHaveBeenCalledWith(httpResponse.statusCode);
-    expect(res.send).toHaveBeenCalledWith(httpResponse.body);
+    expect(res.send).toHaveBeenCalledWith(httpResponse.data);
   });
 });

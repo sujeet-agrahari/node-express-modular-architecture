@@ -41,9 +41,7 @@ describe('AuthController', () => {
 
       const expected = {
         statusCode: 200,
-        body: {
-          data: loginData,
-        },
+        data: loginData,
       };
 
       const doLoginMock = jest.fn().mockResolvedValue(loginData);
