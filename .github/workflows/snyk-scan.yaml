@@ -1,0 +1,29 @@
+name: Snyk Scan
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get Node v16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: code test --sarif
+          args: --sarif-file-output=snyk.sarif
+
+      # Push the Snyk Code results into GitHub Code Scanning tab
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif

@@ -1,5 +1,6 @@
 const { faker } = require('@faker-js/faker');
 
+const { JWT_ACCESS_TOKEN_SECRET } = require('config');
 const AuthController = require('../../../src/modules/auth/auth.controller');
 const AuthService = require('../../../src/modules/auth/auth.service');
 const JwtService = require('../../../src/modules/auth/jwt.service');
@@ -15,7 +16,7 @@ describe('AuthController', () => {
   beforeAll(async () => {
     jwtToken = await JwtService.generateJWT({
       payload,
-      secretKey: 'secretKey',
+      secretKey: JWT_ACCESS_TOKEN_SECRET,
     });
   });
 
