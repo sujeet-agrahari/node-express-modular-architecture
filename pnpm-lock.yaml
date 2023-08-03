@@ -1877,8 +1877,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /dottie@2.0.3:
-    resolution: {integrity: sha512-4liA0PuRkZWQFQjwBypdxPfZaRWiv5tkhMXY2hzsa2pNf5s7U3m9cwUchfNKe8wZQxdGPQQzO6Rm2uGe0rvohQ==}
+  /dottie@2.0.6:
+    resolution: {integrity: sha512-iGCHkfUc5kFekGiqhe8B/mdaurD+lakO9txNnTvKtA6PISrw86LgqHvRzWYPyoE2Ph5aMIrCw9/uko6XHTKCwA==}
     dev: false
 
   /duplexer3@0.1.5:
@@ -4729,7 +4729,7 @@ packages:
       '@types/debug': 4.1.7
       '@types/validator': 13.7.17
       debug: 4.3.4
-      dottie: 2.0.3
+      dottie: 2.0.6
       inflection: 1.13.4
       lodash: 4.17.21
       moment: 2.29.3
