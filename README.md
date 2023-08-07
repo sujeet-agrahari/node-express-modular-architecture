@@ -161,26 +161,25 @@ NODE_CONFIG_DIR=./src/config
 ## Project Structure
 
 ```
-src\
-|--config\         # Contains environment variables and configuration-related files.
-|--components\     # Each entity is contained within its own component.
-   |--component.module.js      # Entry file for the component.
-   |--component.controller.js  # Controller for the component.
-   |--component.service.js     # Service for the component.
-   |--component.routes.js      # Routes for the component.
-   |--component.validator.js   # Validators for the component.
-|--docs\           # Contains Swagger files.
-|--middlewares\    # Contains custom Express middlewares.
-|--db\             # Contains Sequelize ORM files for the data layer.
-   |--models                  # Contains Sequelize models.
-   |--seeders                 # Contains Sequelize seeders.
-   |--migrations              # Contains Sequelize migrations.
-|--utils\          # Contains utility classes and functions.
-|--loaders\.       # Contains Lodash routes and configurations; also validates configurations.
-|--support\        # Contains a wrapper around used packages, allowing for easy package replacement.
-|--app.js          # Contains the Express app.
-|--server.js       # Contains the entry point for the application.
-
+src/
+|--config/                  # Environment variables and configuration-related files.
+|--components/              # Contains individual components.
+   |--component.module.js   # Entry file for the component.
+   |--component.controller.js   # Controller for the component.
+   |--component.service.js      # Service for the component.
+   |--component.routes.js       # Routes for the component.
+   |--component.validator.js    # Validators for the component.
+|--docs/                    # Swagger files for API documentation.
+|--middlewares/             # Custom Express middlewares.
+|--db/                      # Sequelize ORM files for the data layer.
+   |--models/               # Sequelize models.
+   |--seeders/              # Sequelize seeders.
+   |--migrations/           # Sequelize migrations.
+|--utils/                   # Utility classes and functions.
+|--loaders/                 # Lodash routes and configurations; also validates configurations.
+|--support/                 # Wrapper for used packages, enabling easy package replacement.
+|--app.js                   # Express app setup.
+|--server.js                # Entry point for the application.
 ```
 ## CLI Support
 node-express-modular-architecture comes with `cli` support. Instead of creating components and files manully you can use command line tool to automate the process.
