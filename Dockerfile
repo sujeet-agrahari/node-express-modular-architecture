@@ -1,6 +1,6 @@
 ARG HUSKY=0
 
-FROM node:16-alpine AS base
+FROM node:20-alpine AS base
 ENV NODE_ENV=production
 EXPOSE 3000
 RUN npm install -g pnpm
