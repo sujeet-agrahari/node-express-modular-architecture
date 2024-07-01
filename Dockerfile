@@ -8,7 +8,7 @@ RUN mkdir /app && chown -R node:node /app
 WORKDIR /app
 USER node
 COPY --chown=node:node package.json package-lock*.json ./
-RUN pnpm set-script prepare '' && pnpm install
+RUN pnpm install
 ENV PATH /app/node_modules/.bin:$PATH
 # check every 30s to ensure this service returns HTTP 200
 HEALTHCHECK --interval=30s CMD node healthcheck.js
