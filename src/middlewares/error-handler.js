@@ -18,7 +18,7 @@ module.exports = (error, req, res, _next) => {
 
   // catch api error
   if (error instanceof APIError) {
-    return res.status(error.status).send({
+    return res.status(error.status).json({
       error: {
         code: error.status,
         message: error.message,
@@ -28,7 +28,7 @@ module.exports = (error, req, res, _next) => {
 
   // catch db error
   if (error instanceof UniqueConstraintError) {
-    return res.status(400).send({
+    return res.status(400).json({
       error: {
         code: 400,
         message: `duplicate_${error.parent.constraint}`,
@@ -36,7 +36,7 @@ module.exports = (error, req, res, _next) => {
     });
   }
   if (error instanceof ValidationError) {
-    return res.status(400).send({
+    return res.status(400).json({
       error: {
         code: 400,
         message: error.message,
@@ -45,7 +45,7 @@ module.exports = (error, req, res, _next) => {
   }
   if (error instanceof AggregateError) {
     const firstErrorMessage = error.errors[0]?.message || 'Unknown error';
-    return res.status(400).send({
+    return res.status(400).json({
       error: {
         code: 400,
         message: firstErrorMessage,
@@ -54,7 +54,7 @@ module.exports = (error, req, res, _next) => {
   }
 
   // connect all errors
-  return res.status(500).send({
+  return res.status(500).json({
     error: {
       code: 500,
       message: 'Something went wrong!',
