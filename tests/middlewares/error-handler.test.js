@@ -2,6 +2,7 @@ const {
   UniqueConstraintError,
   ValidationError,
   AggregateError,
+  json,
 } = require('sequelize');
 const logger = require('../../src/support/logger');
 const { APIError } = require('../../src/utils/api-errors');
@@ -17,14 +18,14 @@ describe('errorHandlerMiddleware', () => {
     const req = {};
     const res = {
       status: jest.fn().mockReturnThis(),
-      send: jest.fn(),
+      json: jest.fn(),
     };
     const next = jest.fn();
 
     errorHandlerMiddleware(error, req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(error.status);
-    expect(res.send).toHaveBeenCalledWith({
+    expect(res.json).toHaveBeenCalledWith({
       error: {
         code: error.status,
         message: error.message,
@@ -56,14 +57,14 @@ describe('errorHandlerMiddleware', () => {
     const req = {};
     const res = {
       status: jest.fn().mockReturnThis(),
-      send: jest.fn(),
+      json: jest.fn(),
     };
     const next = jest.fn();
 
     errorHandlerMiddleware(error, req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.send).toHaveBeenCalledWith({
+    expect(res.json).toHaveBeenCalledWith({
       error: {
         code: 400,
         message: `duplicate_${error.parent.constraint}`,
@@ -78,14 +79,14 @@ describe('errorHandlerMiddleware', () => {
     const req = {};
     const res = {
       status: jest.fn().mockReturnThis(),
-      send: jest.fn(),
+      json: jest.fn(),
     };
     const next = jest.fn();
 
     errorHandlerMiddleware(error, req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.send).toHaveBeenCalledWith({
+    expect(res.json).toHaveBeenCalledWith({
       error: {
         code: 400,
         message: error.message,
@@ -93,7 +94,7 @@ describe('errorHandlerMiddleware', () => {
     });
   });
 
-  test('should send response with the first error message if error is instance of AggregationError', async () => {
+  test('should json response with the first error message if error is instance of AggregationError', async () => {
     expect.assertions(2);
 
     const error = new AggregateError([
@@ -107,14 +108,14 @@ describe('errorHandlerMiddleware', () => {
     const req = {};
     const res = {
       status: jest.fn().mockReturnThis(),
-      send: jest.fn(),
+      json: jest.fn(),
     };
     const next = jest.fn();
 
     await errorHandlerMiddleware(error, req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.send).toHaveBeenCalledWith({
+    expect(res.json).toHaveBeenCalledWith({
       error: {
         code: 400,
         message: 'Validation error-1',
@@ -122,21 +123,21 @@ describe('errorHandlerMiddleware', () => {
     });
   });
 
-  test('should send response with "Unknown error" no error message and error is instance of AggregationError', async () => {
+  test('should json response with "Unknown error" no error message and error is instance of AggregationError', async () => {
     expect.assertions(2);
 
     const error = new AggregateError([]);
     const req = {};
     const res = {
       status: jest.fn().mockReturnThis(),
-      send: jest.fn(),
+      json: jest.fn(),
     };
     const next = jest.fn();
 
     await errorHandlerMiddleware(error, req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.send).toHaveBeenCalledWith({
+    expect(res.json).toHaveBeenCalledWith({
       error: {
         code: 400,
         message: 'Unknown error',
@@ -151,14 +152,14 @@ describe('errorHandlerMiddleware', () => {
     const req = {};
     const res = {
       status: jest.fn().mockReturnThis(),
-      send: jest.fn(),
+      json: jest.fn(),
     };
     const next = jest.fn();
 
     errorHandlerMiddleware(error, req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.send).toHaveBeenCalledWith({
+    expect(res.json).toHaveBeenCalledWith({
       error: {
         code: 500,
         message: 'Something went wrong!',
@@ -173,7 +174,7 @@ describe('errorHandlerMiddleware', () => {
     const req = {};
     const res = {
       status: jest.fn().mockReturnThis(),
-      send: jest.fn(),
+      json: jest.fn(),
     };
     const next = jest.fn();
 

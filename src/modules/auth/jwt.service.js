@@ -18,7 +18,7 @@ module.exports = {
     signOption = JWT_SIGN_OPTIONS,
   }) => {
     try {
-      const token = `Bearer ${jwt.sign(payload, 'asfasdfsd', signOption)}`;
+      const token = `Bearer ${jwt.sign(payload, secretKey, signOption)}`;
       return token;
     } catch (error) {
       throw new BadRequestError(error.message);
@@ -39,7 +39,7 @@ module.exports = {
     signOption = JWT_SIGN_OPTIONS,
   }) => {
     try {
-      const data = jwt.verify(token, 'asdfasdf', signOption);
+      const data = jwt.verify(token, secretKey, signOption);
       return data;
     } catch (error) {
       throw new BadRequestError(error.message);

@@ -83,6 +83,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         beforeValidate: async (user) => {
           if (user.password) {
+            // deepcode ignore HardcodedSecret: <please specify a reason of ignoring this>
             user.password = await bcrypt.hash(user.password, 8);
           }
         },

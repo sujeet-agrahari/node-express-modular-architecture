@@ -18,7 +18,7 @@ describe('express-callback middleware', () => {
     res = {
       set: jest.fn(),
       status: jest.fn().mockReturnThis(),
-      send: jest.fn(),
+      json: jest.fn(),
     };
     controller = jest.fn().mockResolvedValue({
       statusCode: 200,
@@ -70,6 +70,6 @@ describe('express-callback middleware', () => {
 
     expect(res.set).toHaveBeenCalledWith(httpResponse.headers);
     expect(res.status).toHaveBeenCalledWith(httpResponse.statusCode);
-    expect(res.send).toHaveBeenCalledWith(httpResponse.data);
+    expect(res.json).toHaveBeenCalledWith(httpResponse.data);
   });
 });
