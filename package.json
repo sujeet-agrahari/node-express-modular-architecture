@@ -11,8 +11,7 @@
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
     "lint:fix": "./node_modules/.bin/eslint . --fix",
-    "create:component": "node ./cli init:component",
-    "prepare": "husky install"
+    "create:component": "node ./cli init:component"
   },
   "husky": {
     "hooks": {
@@ -29,10 +28,10 @@
     "bcryptjs": "^2.4.3",
     "config": "^3.3.12",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
     "express": "4.19.2",
     "express-async-errors": "^3.1.1",
     "express-winston": "^4.2.0",
+    "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "moment": "2.29.4",

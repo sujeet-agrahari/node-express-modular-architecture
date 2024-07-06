@@ -4,7 +4,7 @@ const app = express();
 
 const cors = require('cors');
 
-require('dotenv').config();
+// require('dotenv').config();
 
 // logger
 const { requestLogger } = require('./support/logger');

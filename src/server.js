@@ -70,7 +70,7 @@ function onError(error) {
 function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-  console.info(`Listening on ${bind}`);
+  console.info(`Listening on ${bind} in ${process.env.NODE_ENV} environment`);
 }
 
 server.on('error', onError);
