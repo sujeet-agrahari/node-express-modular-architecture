@@ -1,14 +1,14 @@
-const Joi = require('@hapi/joi').extend(require('@hapi/joi-date'));
+import Joi from 'joi'
 
 const options = {
   errors: {
     wrap: {
-      label: '',
-    },
-  },
-};
+      label: ''
+    }
+  }
+}
 
-module.exports = {
+export default {
   /**
    * Validates a login request.
    * @param {object} httpRequest - The HTTP request object.
@@ -23,10 +23,10 @@ module.exports = {
         .pattern(/^[6-9]\d{9}$/)
         .required()
         .messages({
-          'string.pattern.base': 'Provide valid phone number!',
+          'string.pattern.base': 'Provide valid phone number!'
         }),
-      password: Joi.string().min(8).max(20).alphanum().required(),
-    });
-    return schema.validate(httpRequest.body, options);
-  },
-};
+      password: Joi.string().min(8).max(20).alphanum().required()
+    })
+    return schema.validate(httpRequest.body, options)
+  }
+}

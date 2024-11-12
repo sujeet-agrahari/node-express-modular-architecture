@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   CONTINUE: 100,
   SWITCHING_PROTOCOLS: 101,
   OK: 200,
@@ -18,5 +18,5 @@ module.exports = {
   INTERNAL_SERVER_ERROR: 500,
   NOT_IMPLEMENTED: 501,
   BAD_GATEWAY: 502,
-  SERVICE_UNAVAILABLE: 503,
-};
+  SERVICE_UNAVAILABLE: 503
+}

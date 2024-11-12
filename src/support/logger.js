@@ -1,20 +1,23 @@
-const winston = require('winston');
-const { NODE_ENV } = require('config');
-const expressWinston = require('express-winston');
-const packageName = require('../../../package.json');
+import winston from 'winston'
+import config from 'config'
+import expressWinston from 'express-winston'
+import { readJsonFileSync } from '../utils/helper.js'
+
+// Example usage of the helper function
+const packageName = readJsonFileSync('../package.json')
 
 // Log formatter function
 const logFormatter = winston.format.printf((info) => {
-  const { timestamp, level, stack, message } = info;
-  const errorMessage = stack || message;
+  const { timestamp, level, stack, message } = info
+  const errorMessage = stack || message
 
-  const symbols = Object.getOwnPropertySymbols(info);
+  const symbols = Object.getOwnPropertySymbols(info)
   if (info[symbols[0]] !== 'error') {
-    return `${timestamp} ${level}: ${message}`;
+    return `${timestamp} ${level}: ${message}`
   }
 
-  return `${timestamp} ${level}: ${errorMessage}`;
-});
+  return `${timestamp} ${level}: ${errorMessage}`
+})
 
 // Create the base logger configuration
 const baseLoggerConfig = {
@@ -23,44 +26,44 @@ const baseLoggerConfig = {
   level: 'debug',
   format: winston.format.combine(
     winston.format.timestamp({
-      format: 'YYYY-MM-DD HH:mm:ss',
+      format: 'YYYY-MM-DD HH:mm:ss'
     }),
     winston.format.errors({ stack: true }),
     winston.format.splat(),
     winston.format.json()
   ),
-  defaultMeta: { service: `${packageName.name.toLocaleLowerCase()}-service` },
-};
+  defaultMeta: { service: `${packageName.name.toLocaleLowerCase()}-service` }
+}
 
 // Create the console transport configuration
 const consoleTransport = new winston.transports.Console({
-  format: winston.format.combine(winston.format.colorize(), logFormatter),
-});
+  format: winston.format.combine(winston.format.colorize(), logFormatter)
+})
 
 // Create the logger with the console transport
 const logger = winston.createLogger({
   ...baseLoggerConfig,
-  transports: [consoleTransport],
-});
+  transports: [consoleTransport]
+})
 
 // Add file transports if in production environment
-if (NODE_ENV === 'production') {
+if (config.NODE_ENV === 'production') {
   logger.add(
     new winston.transports.File({ filename: 'logs/error.log', level: 'error' })
-  );
+  )
   logger.add(
     new winston.transports.File({
       filename: 'logs/combined.log',
-      level: 'debug',
+      level: 'debug'
     })
-  );
+  )
 }
 
-// Export the logger
-module.exports = logger;
-
-// Export the request logger middleware
-module.exports.requestLogger = expressWinston.logger({
+/**
+ * Request logger middleware for Express.
+ * @type {import('express').RequestHandler}
+ */
+const requestLogger = expressWinston.logger({
   transports: [new winston.transports.Console()],
   format: winston.format.combine(
     winston.format.json(),
@@ -76,7 +79,9 @@ module.exports.requestLogger = expressWinston.logger({
    * @param {object} _res - The response object.
    * @returns {boolean} - Always returns `false`.
    */
-  ignoreRoute(_req, _res) {
-    return false;
-  },
-});
+  ignoreRoute (_req, _res) {
+    return false
+  }
+})
+
+export { logger, requestLogger }

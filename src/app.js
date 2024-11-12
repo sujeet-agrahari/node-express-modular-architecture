@@ -1,44 +1,57 @@
-const express = require('express');
+import express from 'express'
+import cors from 'cors'
+import { requestLogger } from './support/logger.js'
+import { errorHandler, badJsonHandler, notFoundHandler } from './middlewares/index.js'
+import loadRoutes from './loaders/routes.js'
+import './loaders/config.js'
+import helmet from 'helmet'
+import csurf from 'csurf'
 
-const app = express();
+const app = express()
 
-const cors = require('cors');
+/**
+ * Enable CORS
+ */
+app.use(cors())
 
-// require('dotenv').config();
+/**
+ * Set up security headers.
+ */
+app.use(helmet())
 
-// logger
-const { requestLogger } = require('./support/logger');
+/**
+ * Set up CSRF protection.
+ */
+app.use(csurf())
 
-// error handler
-require('express-async-errors');
+/**
+ * Log requests
+ */
+app.use(requestLogger)
 
-const {
-  errorHandler,
-  badJsonHandler,
-  notFoundHandler,
-} = require('./middlewares');
+/**
+ * Parse JSON body
+ */
+app.use(express.json())
 
-// enable cors
-app.use(cors());
+/**
+ * Handle bad JSON format
+ */
+app.use(badJsonHandler)
 
-app.use(requestLogger);
+/**
+ * Load routes
+ */
+loadRoutes(app)
 
-// parse json body
-app.use(express.json());
+/**
+ * Handle 404 not found error
+ */
+app.use(notFoundHandler)
 
-// handle bad json format
-app.use(badJsonHandler);
+/**
+ * Catch all errors
+ */
+app.use(errorHandler)
 
-// load routes
-require('./loaders/routes')(app);
-
-// load and validate env variables
-require('./loaders/config');
-
-// handle 404 not found error
-app.use(notFoundHandler);
-
-// catch all errors
-app.use(errorHandler);
-
-module.exports = app;
+export default app

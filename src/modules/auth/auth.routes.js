@@ -8,17 +8,17 @@
  * @param {makeValidatorCallback} AuthRouter.makeValidatorCallback
  * @returns {ExpressRouter}
  */
-module.exports = ({
+export default ({
   router,
   AuthController,
   AuthValidator,
   makeValidatorCallback,
-  makeExpressCallback,
+  makeExpressCallback
 }) => {
   router.post(
     '/login',
     makeValidatorCallback(AuthValidator.validateLogin),
     makeExpressCallback(AuthController.login)
-  );
-  return router;
-};
+  )
+  return router
+}

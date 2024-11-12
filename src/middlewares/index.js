@@ -1,17 +1,17 @@
-const auth = require('./auth');
-const errorHandler = require('./error-handler');
-const authorize = require('./authorize');
-const badJsonHandler = require('./validate-json');
-const notFoundHandler = require('./not-found-error');
-const makeExpressCallback = require('./express-callback');
-const makeValidatorCallback = require('./validator-callback');
+import auth from './auth.js'
+import errorHandler from './error-handler.js'
+import authorize from './authorize.js'
+import badJsonHandler from './validate-json.js'
+import notFoundHandler from './not-found-error.js'
+import makeExpressCallback from './express-callback.js'
+import makeValidatorCallback from './validator-callback.js'
 
-module.exports = {
+export {
   auth,
   authorize,
   errorHandler,
   badJsonHandler,
   notFoundHandler,
   makeExpressCallback,
-  makeValidatorCallback,
-};
+  makeValidatorCallback
+}

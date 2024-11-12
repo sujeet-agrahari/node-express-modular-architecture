@@ -1,15 +1,18 @@
-const { BadRequestError } = require('../utils/api-errors');
+import { BadRequestError } from '../utils/api-errors.js'
 
 /**
+ * Middleware to validate JSON syntax in request body
  *
- * @param err
- * @param req
- * @param res
- * @param next
+ * @param {Object} err - The error object
+ * @param {Object} req - The request object
+ * @param {Object} res - The response object
+ * @param {Function} next - The next middleware function
  */
-module.exports = (err, req, res, next) => {
+const validateJson = (err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
-    throw new BadRequestError(err.message);
+    throw new BadRequestError(err.message)
   }
-  return next();
-};
+  return next()
+}
+
+export default validateJson

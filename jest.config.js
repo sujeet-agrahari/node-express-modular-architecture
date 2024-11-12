@@ -1,8 +1,6 @@
-module.exports = {
-  setupFiles: ['./tests/settings/env-setup.js'],
+const jestConfig = {
   testEnvironment: 'node',
-  testMatch: ['**/tests/**/*.test.js'],
-  transform: {
-    '^.+\\.js$': 'babel-jest',
-  },
-};
+  testMatch: ['**/tests/**/*.test.js']
+}
+
+export default jestConfig
