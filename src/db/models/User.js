@@ -1,42 +1,45 @@
 /* eslint-disable no-param-reassign */
-const { Model } = require('sequelize');
-const bcrypt = require('bcryptjs');
+import { Model } from 'sequelize'
+import bcrypt from 'bcryptjs'
 
 /**
+ * User model definition.
  *
- * @param {import('sequelize').Sequelize} sequelize
- * @param {import('sequelize/types')} DataTypes
- * @returns
+ * @param {import('sequelize').Sequelize} sequelize - The Sequelize instance.
+ * @param {import('sequelize/types')} DataTypes - The Sequelize DataTypes.
+ * @returns {typeof Model} - The User model.
  */
-module.exports = (sequelize, DataTypes) => {
+const UserModel = (sequelize, DataTypes) => {
   /**
-   *
+   * User class extending Sequelize Model.
    */
   class User extends Model {
-    // with static add custom class method
     /**
+     * Associate models.
      *
-     * @param models
+     * @param {object} models - The models to associate.
      */
-    static associate(models) {
+    static associate (models) {
       // define association here
       if (models.Student) {
         models.User.hasOne(models.Student, {
-          foreignKey: 'userId',
-        });
+          foreignKey: 'userId'
+        })
       }
     }
 
-    // add instance method here, below overrides toJSON()
     /**
+     * Override toJSON method to exclude password.
      *
+     * @returns {object} - The user object without the password.
      */
-    toJSON() {
-      const user = { ...this.dataValues };
-      delete user.password;
-      return user;
+    toJSON () {
+      const user = { ...this.dataValues }
+      delete user.password
+      return user
     }
   }
+
   User.init(
     {
       phone: {
@@ -45,20 +48,20 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          is: /^[6-9]\d{9}$/,
-        },
+          is: /^[6-9]\d{9}$/
+        }
       },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notNull: true,
-          notEmpty: true,
-        },
+          notEmpty: true
+        }
       },
       isDeleted: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        defaultValue: false
       },
       role: {
         type: DataTypes.STRING,
@@ -67,28 +70,30 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['Student', 'Teacher']],
-        },
-      },
+          isIn: [['Student', 'Teacher']]
+        }
+      }
     },
     {
       sequelize,
       schema: 'NITTI',
       modelName: 'User',
       hooks: {
-        // before validate will be called before beforeCreate, so it will throw validation error if used beforeCreate
         /**
+         * Hash the password before validating the user.
          *
-         * @param user
+         * @param {User} user - The user instance.
          */
         beforeValidate: async (user) => {
           if (user.password) {
-            // deepcode ignore HardcodedSecret: <please specify a reason of ignoring this>
-            user.password = await bcrypt.hash(user.password, 8);
+            user.password = await bcrypt.hash(user.password, 8)
           }
-        },
-      },
+        }
+      }
     }
-  );
-  return User;
-};
+  )
+
+  return User
+}
+
+export default UserModel

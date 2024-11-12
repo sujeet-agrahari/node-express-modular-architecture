@@ -1,29 +1,26 @@
-const {
-  UniqueConstraintError,
-  ValidationError,
-  AggregateError,
-} = require('sequelize');
-const logger = require('../support/logger');
-const { APIError } = require('../utils/api-errors');
+import { UniqueConstraintError, ValidationError, AggregateError } from 'sequelize'
+import { logger } from '../support/logger.js'
+import { APIError } from '../utils/api-errors.js'
 
 /**
+ * Error handling middleware for Express
  *
- * @param error
- * @param req
- * @param res
- * @param next
+ * @param {Error} error - The error object
+ * @param {Request} req - The Express request object
+ * @param {Response} res - The Express response object
+ * @param {Function} _next - The next middleware function
  */
-module.exports = (error, req, res, _next) => {
-  logger.error(error);
+const errorHandler = (error, req, res, _next) => {
+  logger.error(error)
 
   // catch api error
   if (error instanceof APIError) {
     return res.status(error.status).json({
       error: {
         code: error.status,
-        message: error.message,
-      },
-    });
+        message: error.message
+      }
+    })
   }
 
   // catch db error
@@ -31,33 +28,35 @@ module.exports = (error, req, res, _next) => {
     return res.status(400).json({
       error: {
         code: 400,
-        message: `duplicate_${error.parent.constraint}`,
-      },
-    });
+        message: `duplicate_${error.parent.constraint}`
+      }
+    })
   }
   if (error instanceof ValidationError) {
     return res.status(400).json({
       error: {
         code: 400,
-        message: error.message,
-      },
-    });
+        message: error.message
+      }
+    })
   }
   if (error instanceof AggregateError) {
-    const firstErrorMessage = error.errors[0]?.message || 'Unknown error';
+    const firstErrorMessage = error.errors[0]?.message || 'Unknown error'
     return res.status(400).json({
       error: {
         code: 400,
-        message: firstErrorMessage,
-      },
-    });
+        message: firstErrorMessage
+      }
+    })
   }
 
   // connect all errors
   return res.status(500).json({
     error: {
       code: 500,
-      message: 'Something went wrong!',
-    },
-  });
-};
+      message: 'Something went wrong!'
+    }
+  })
+}
+
+export default errorHandler

@@ -1,12 +1,16 @@
-const { UnauthorizedError } = require('../utils/api-errors');
+import { UnauthorizedError } from '../utils/api-errors.js'
 
 /**
+ * Middleware to authorize based on user roles.
  *
- * @param roles
+ * @param {Array<string>} roles - Array of roles that are allowed to access the route.
+ * @returns {Function} Middleware function to check user role.
  */
-module.exports = (roles) => (req, res, next) => {
+const authorize = (roles) => (req, res, next) => {
   if (!req.user.role || !roles.includes(req.user.role)) {
-    throw new UnauthorizedError();
+    throw new UnauthorizedError()
   }
-  return next();
-};
+  return next()
+}
+
+export default authorize

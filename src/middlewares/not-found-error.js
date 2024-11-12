@@ -1,11 +1,14 @@
-const { NotFoundError } = require('../utils/api-errors');
+import { NotFoundError } from '../utils/api-errors.js'
 
 /**
+ * Middleware to handle not found errors.
  *
- * @param req
- * @param res
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
  */
-module.exports = (req, _res) => {
-  const errorMessage = `Not Found: ${req.method} on ${req.url}`;
-  throw new NotFoundError(errorMessage);
-};
+const notFoundErrorHandler = (req, _res) => {
+  const errorMessage = `Not Found: ${req.method} on ${req.url}`
+  throw new NotFoundError(errorMessage)
+}
+
+export default notFoundErrorHandler

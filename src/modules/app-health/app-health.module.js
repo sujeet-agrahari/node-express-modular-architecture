@@ -1,22 +1,26 @@
-const router = require('express').Router();
+import { Router } from 'express'
+import { makeExpressCallback } from '../../middlewares/index.js'
+import AppHealthService from './app-health.service.js'
+import AppHealthController from './app-health.controller.js'
+import createRoutes from './app-health.routes.js'
 
-const { makeExpressCallback } = require('../../middlewares');
+/**
+ * Module for handling application health-related functionality.
+ * @module AppHealthModule
+ */
 
-// service
-const AppHealthService = require('./app-health.service');
+// Initialize the router
+const router = Router()
 
-// controller
-const AppHealthController = require('./app-health.controller');
-
-// routes
-const routes = require('./app-health.routes')({
+// Initialize routes with dependencies
+const routes = createRoutes({
   router,
   AppHealthController,
-  makeExpressCallback,
-});
+  makeExpressCallback
+})
 
-module.exports = {
+export {
   AppHealthController,
   AppHealthService,
-  AppHealthRoutes: routes,
-};
+  routes as AppHealthRoutes
+}

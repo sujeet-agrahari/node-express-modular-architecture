@@ -1,30 +1,35 @@
-const router = require('express').Router();
+import { Router } from 'express'
+import { makeExpressCallback, makeValidatorCallback } from '../../middlewares/index.js'
+import AuthValidator from './auth.validator.js'
+import AuthService from './auth.service.js'
+import AuthController from './auth.controller.js'
+import createRoutes from './auth.routes.js'
 
-const {
-  makeExpressCallback,
-  makeValidatorCallback,
-} = require('../../middlewares');
+/**
+ * Initializes the router and sets up the routes for the authentication module.
+ */
+const router = Router()
 
-// validator
-const AuthValidator = require('./auth.validator');
-
-// service
-const AuthService = require('./auth.service');
-
-// controller
-const AuthController = require('./auth.controller');
-
-// routes
-const routes = require('./auth.routes')({
+/**
+ * Sets up the routes for the authentication module.
+ * @param {Object} dependencies - The dependencies required for setting up the routes.
+ * @param {Router} dependencies.router - The Express router.
+ * @param {Object} dependencies.AuthController - The authentication controller.
+ * @param {Object} dependencies.AuthValidator - The authentication validator.
+ * @param {Function} dependencies.makeValidatorCallback - Middleware for validation.
+ * @param {Function} dependencies.makeExpressCallback - Middleware for handling Express callbacks.
+ * @returns {Router} - The configured router.
+ */
+const routes = createRoutes({
   router,
   AuthController,
   AuthValidator,
   makeValidatorCallback,
-  makeExpressCallback,
-});
+  makeExpressCallback
+})
 
-module.exports = {
+export {
   AuthController,
   AuthService,
-  AuthRoutes: routes,
-};
+  routes as AuthRoutes
+}

@@ -1,5 +1,5 @@
-const AuthService = require('./auth.service');
-const helper = require('../../utils/helper');
+import AuthService from './auth.service.js'
+import { generateResponse } from '../../utils/helper.js'
 
 const AuthController = {
   /**
@@ -10,9 +10,9 @@ const AuthController = {
    * @returns {Promise.<ControllerResponse> }
    */
   login: async (httpRequest) => {
-    const loginData = await AuthService.doLogin(httpRequest.body);
-    return helper.generateResponse(loginData);
-  },
-};
+    const loginData = await AuthService.doLogin(httpRequest.body)
+    return generateResponse(loginData)
+  }
+}
 
-module.exports = AuthController;
+export default AuthController

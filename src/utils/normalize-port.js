@@ -3,15 +3,15 @@
  * @param {string} val - The port value to normalize.
  * @returns {(number|string|false)} - The normalized port value.
  */
-module.exports = (val) => {
-  const port = parseInt(val, 10);
+export default (val) => {
+  const port = parseInt(val, 10)
   if (Number.isNaN(port)) {
     // named pipe
-    return val;
+    return val
   }
   if (port >= 0) {
     // port number
-    return port;
+    return port
   }
-  return false;
-};
+  return false
+}

@@ -1,59 +1,70 @@
-const { faker } = require('@faker-js/faker');
+import { faker } from '@faker-js/faker'
+import config from 'config'
+import AuthController from '../../../src/modules/auth/auth.controller'
+import AuthService from '../../../src/modules/auth/auth.service'
+import JwtService from '../../../src/modules/auth/jwt.service'
 
-const { JWT_ACCESS_TOKEN_SECRET } = require('config');
-const AuthController = require('../../../src/modules/auth/auth.controller');
-const AuthService = require('../../../src/modules/auth/auth.service');
-const JwtService = require('../../../src/modules/auth/jwt.service');
-
+/**
+ * Tests for AuthController
+ */
 describe('AuthController', () => {
   const payload = {
     userId: faker.datatype.uuid(),
-    role: 'User',
-  };
+    role: 'User'
+  }
 
-  let jwtToken;
+  let jwtToken
 
+  /**
+   * Generate JWT token before all tests
+   */
   beforeAll(async () => {
     jwtToken = await JwtService.generateJWT({
       payload,
-      secretKey: JWT_ACCESS_TOKEN_SECRET,
-    });
-  });
+      secretKey: config.JWT_ACCESS_TOKEN_SECRET
+    })
+  })
 
+  /**
+   * Restore mocks after each test
+   */
   afterEach(() => {
-    jest.restoreAllMocks();
-  });
+    jest.restoreAllMocks()
+  })
 
+  /**
+   * Tests for login method
+   */
   describe('login', () => {
     it('should login user and return token', async () => {
-      expect.assertions(2);
+      expect.assertions(2)
       // Arrange
       const httpRequest = {
         body: {
           phone: faker.phone.phoneNumber('##########'),
-          password: faker.internet.password(8),
-        },
-      };
+          password: faker.internet.password(8)
+        }
+      }
 
       const loginData = {
         ...payload,
-        accessToken: jwtToken,
-      };
+        accessToken: jwtToken
+      }
 
       const expected = {
         statusCode: 200,
-        data: loginData,
-      };
+        data: loginData
+      }
 
-      const doLoginMock = jest.fn().mockResolvedValue(loginData);
-      AuthService.doLogin = doLoginMock;
+      const doLoginMock = jest.fn().mockResolvedValue(loginData)
+      AuthService.doLogin = doLoginMock
 
       // Act
-      const result = await AuthController.login(httpRequest);
+      const result = await AuthController.login(httpRequest)
 
       // Assert
-      expect(result).toEqual(expected);
-      expect(doLoginMock).toHaveBeenCalledWith(httpRequest.body);
-    });
-  });
-});
+      expect(result).toEqual(expected)
+      expect(doLoginMock).toHaveBeenCalledWith(httpRequest.body)
+    })
+  })
+})
